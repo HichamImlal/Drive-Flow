@@ -1,5 +1,4 @@
 import 'package:drive_flow_ui/constant.dart';
-import 'package:drive_flow_ui/screens/intro_screen/FirstScreen.dart';
 import 'package:drive_flow_ui/screens/intro_screen/IntroScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

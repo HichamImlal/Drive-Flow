@@ -1,7 +1,7 @@
 import 'package:drive_flow_ui/screens/LoginScreen.dart';
+import 'package:drive_flow_ui/controller/ButtomBarMenu.dart';
 import 'package:drive_flow_ui/screens/SignUpScreen.dart';
 import 'package:drive_flow_ui/screens/SplashScreen.dart';
-import 'package:drive_flow_ui/screens/intro_screen/IntroScreen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -18,11 +18,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return   MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         'LoginScreen':(context) => const LoginScreen(),
         'SignUpScreen':(context) => const SignUpScreen(),
+        'SearshScreen':(context) => const SearshScreen(),
       },
-      debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
   }

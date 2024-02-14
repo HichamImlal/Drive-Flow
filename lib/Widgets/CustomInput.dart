@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomInput extends StatelessWidget {
   CustomInput({super.key, required this.hint});
   String hint;

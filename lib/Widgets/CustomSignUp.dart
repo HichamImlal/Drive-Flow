@@ -72,7 +72,7 @@ class SignUpCustom extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const ButtonCustom(text:'Sign Up'),
+                  ButtonCustom(text:'Sign Up', clicked: () {Navigator.pushNamed(context, 'SearshScreen');}),
                   const SizedBox(
                     height: 15,
                   ),
