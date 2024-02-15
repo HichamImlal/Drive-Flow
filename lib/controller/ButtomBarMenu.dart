@@ -2,6 +2,7 @@ import "package:drive_flow_ui/constant.dart";
 import "package:flutter/material.dart";
 import "package:google_nav_bar/google_nav_bar.dart";
 
+import "../screens/HomeScreen.dart";
 import "../screens/MapsScreen.dart";
 
 class SearshScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class SearshScreen extends StatefulWidget {
   State<SearshScreen> createState() => _SearshScreenState();
 }
 class _SearshScreenState extends State<SearshScreen> {
-  List<Widget> body = [Icon(Icons.home),MapsScreen(),Icon(Icons.message),Icon(Icons.person)];
+  List<Widget> body = [const HomeScreen(),const MapsScreen(),Icon(Icons.message),Icon(Icons.person)];
   int index_=1;
   @override
   Widget build(BuildContext context) {

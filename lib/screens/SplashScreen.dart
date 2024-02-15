@@ -46,8 +46,10 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             Image(
               image: AssetImage('assets/images/logo.png'),
-              width: 200,
-            )
+              width: 150,
+            ),
+            Text('Drive Flow',style: TextStyle(fontFamily: 'Poppins_med',fontSize: 27,color: Colors.white,fontWeight: FontWeight.bold),),
+
           ],
         ),
       ),

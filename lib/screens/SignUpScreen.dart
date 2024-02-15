@@ -1,3 +1,4 @@
+import 'package:drive_flow_ui/constant.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/CustomSignUp.dart';
 
@@ -11,13 +12,13 @@ class SignUpScreen extends StatelessWidget {
       body: Stack(
           children: <Widget>[
             Positioned(
-              top: -height * 0.335,
+              top: -height * 0.45,
               child: Transform.rotate(
                 angle: 21,
                 child: Container(
-                  height: height,
-                  width: height * 0.5,
-                  decoration: const BoxDecoration(color: Colors.blue),
+                  height: height*1.07,
+                  width: height*1.07,
+                  decoration:  BoxDecoration(color: MainColor),
                 ),
               ),
             ),
