@@ -17,7 +17,6 @@ class FirstScreen extends StatelessWidget {
           const Text(
             'Enjoy your trip',
             style: TextStyle(
-                fontFamily: 'Poppins_med',
                 fontSize: 24,
                 color: Color(0xff4489FE)),
           ),

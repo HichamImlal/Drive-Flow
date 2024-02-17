@@ -23,7 +23,7 @@ class CustomSearch extends StatelessWidget {
               backgroundImage: AssetImage('assets/images/person.jpg'),
             ),
             SizedBox(width: 20,),
-            Text('What\'s in your mind ?',style: TextStyle(fontFamily: 'Poppins_med'),),
+            Text('What\'s in your mind ?'),
             Spacer(),
             Image(image: AssetImage('assets/images/addpic.png'),width: 28,),
             SizedBox(width: 10,),

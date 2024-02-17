@@ -48,7 +48,6 @@ class _LoginCustomState extends State<LoginCustom> {
                 const Text(
                   'Login',
                   style: TextStyle(
-                      fontFamily: 'Poppins_med',
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
@@ -94,7 +93,7 @@ class _LoginCustomState extends State<LoginCustom> {
                          const Text(
                           'Remember me',
                           style:
-                              TextStyle(fontFamily: 'Poppins_med', fontSize: 13),
+                              TextStyle(fontSize: 13),
                                                ),
                       ],
                     ),
@@ -102,7 +101,7 @@ class _LoginCustomState extends State<LoginCustom> {
                       padding: EdgeInsets.only(right: 15),
                       child: Text(
                         'Forgot Password?',
-                        style: TextStyle(fontFamily: 'Poppins_med', fontSize: 13),
+                        style: TextStyle(fontSize: 13),
                       ),
                     ),
                   ],
@@ -122,9 +121,8 @@ class _LoginCustomState extends State<LoginCustom> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'I don’t have an a compte ?',
+                      'I don\'t have an a compte ?',
                       style: TextStyle(
-                        fontFamily: 'Poppins_med',
                         fontSize: 13,
                       ),
                     ),
@@ -138,7 +136,6 @@ class _LoginCustomState extends State<LoginCustom> {
                       child: Text(
                         'Register',
                         style: TextStyle(
-                          fontFamily: 'Poppins_med',
                           color: MainColor,
                         ),
                       ),

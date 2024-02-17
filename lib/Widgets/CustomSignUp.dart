@@ -41,7 +41,6 @@ class SignUpCustom extends StatelessWidget {
                   const Text(
                     'Sign Up',
                     style: TextStyle(
-                        fontFamily: 'Poppins_med',
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
@@ -86,7 +85,6 @@ class SignUpCustom extends StatelessWidget {
                       const Text(
                         'Alredy have an Account ?',
                         style: TextStyle(
-                          fontFamily: 'Poppins_med',
                           fontSize: 13,
                         ),
                       ),
@@ -100,7 +98,6 @@ class SignUpCustom extends StatelessWidget {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontFamily: 'Poppins_med',
                             color: MainColor,
                           ),
                         ),

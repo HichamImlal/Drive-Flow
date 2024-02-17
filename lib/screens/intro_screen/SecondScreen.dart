@@ -17,7 +17,6 @@ class SecondScreen extends StatelessWidget {
           const Text(
             'Choose your destination',
             style: TextStyle(
-                fontFamily: 'Poppins_med',
                 fontSize: 24,
                 color: Color(0xff4489FE)),
           ),

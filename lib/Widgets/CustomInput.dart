@@ -14,9 +14,9 @@ class CustomInput extends StatelessWidget {
           filled: true,
           fillColor: Colors.grey[300],
           hoverColor: Colors.grey,
-          counterStyle: TextStyle(color: Colors.blue),
+          counterStyle: const TextStyle(color: Colors.blue),
           hintText: hint,
-          hintStyle: TextStyle(fontFamily: 'Poppins'),
+          hintStyle: const TextStyle(fontFamily: 'Poppins'),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
           ),

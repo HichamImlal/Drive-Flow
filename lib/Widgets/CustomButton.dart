@@ -23,7 +23,6 @@ class ButtonCustom extends StatelessWidget {
           child: Text(
             text,
             style: const TextStyle(
-              fontFamily: 'Poppins_med',
               fontSize: 26,
               color: Colors.white,
             ),

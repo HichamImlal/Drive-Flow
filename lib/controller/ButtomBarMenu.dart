@@ -1,4 +1,4 @@
-import "package:drive_flow_ui/constant.dart";
+import "package:drive_flow_ui/screens/NotificationScreen.dart";
 import "package:flutter/material.dart";
 import "package:google_nav_bar/google_nav_bar.dart";
 
@@ -12,7 +12,7 @@ class SearshScreen extends StatefulWidget {
   State<SearshScreen> createState() => _SearshScreenState();
 }
 class _SearshScreenState extends State<SearshScreen> {
-  List<Widget> body = [const HomeScreen(),const MapsScreen(),Icon(Icons.message),Icon(Icons.person)];
+  List<Widget> body = [const HomeScreen(),const MapsScreen(), const NotificationScreen(),Icon(Icons.person)];
   int index_=1;
   @override
   Widget build(BuildContext context) {
@@ -27,30 +27,24 @@ class _SearshScreenState extends State<SearshScreen> {
               ),
             ),
           ),
-          child: Padding(
-            padding:  EdgeInsets.only(bottom:3,top: 3),
-            child: GNav(
-              onTabChange: (indix) {
-                setState(() {
-                  index_=indix;
-                  print(index_);
-                });
-              },
-              tabBackgroundColor: MainColor,
-              activeColor: Colors.white,
-              curve: Curves.easeInSine,
-              textStyle: const TextStyle(fontFamily: 'Poppins_med',color: Colors.white),
-              selectedIndex: 1,
-              padding:const  EdgeInsets.all(12),
-              iconSize: 30,
-              gap: 8,
-              tabs:const  [
-                GButton(icon: Icons.home,text: 'Home'),
-                GButton(icon: Icons.search,text: 'Search',),
-                GButton(icon: Icons.message,text: 'Messages',),
-                GButton(icon: Icons.person,text: 'Profile',),
-              ],
-            ),
+          child: GNav(
+            onTabChange: (indix) {
+              setState(() {
+                index_=indix;
+              });
+            },
+            duration: const Duration(seconds: 0),
+            activeColor: Colors.black54,
+            selectedIndex: 1,
+            padding:const  EdgeInsets.symmetric(horizontal:12,vertical: 5),
+            iconSize: 30,
+            style: GnavStyle.oldSchool, 
+            tabs:const  [
+              GButton(icon: Icons.home,text: 'Home'),
+              GButton(icon: Icons.search,text: 'Search',),
+              GButton(icon: Icons.notifications,text: 'Notifications',),
+              GButton(icon: Icons.person,text: 'Profile',),
+            ],
           ),
         ),
         body: Center(child: body[index_],),

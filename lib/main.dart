@@ -17,6 +17,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return   MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Poppins_med'),
       routes: {
         'LoginScreen':(context) => const LoginScreen(),
         'SignUpScreen':(context) => const SignUpScreen(),

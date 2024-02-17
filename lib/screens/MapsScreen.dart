@@ -18,7 +18,7 @@ class _MapsScreenState extends State<MapsScreen> {
           mapController = controller;
         },
         initialCameraPosition:  const CameraPosition(
-          target: LatLng(37.7749, -122.4194), // San Francisco coordinates
+          target: LatLng(34.0209, -6.8416), // San Francisco coordinates
           zoom: 12.0,
         ),
       ),
