@@ -1,7 +1,8 @@
+// ignore: file_names
 import "package:drive_flow_ui/screens/NotificationScreen.dart";
+import "package:drive_flow_ui/screens/SettingsScreen.dart";
 import "package:flutter/material.dart";
 import "package:google_nav_bar/google_nav_bar.dart";
-
 import "../screens/HomeScreen.dart";
 import "../screens/MapsScreen.dart";
 
@@ -12,7 +13,7 @@ class SearshScreen extends StatefulWidget {
   State<SearshScreen> createState() => _SearshScreenState();
 }
 class _SearshScreenState extends State<SearshScreen> {
-  List<Widget> body = [const HomeScreen(),const MapsScreen(), const NotificationScreen(),Icon(Icons.person)];
+  List<Widget> body = [const HomeScreen(),const MapsScreen(), const NotificationScreen(),const SettingsScreen()];
   int index_=1;
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _SearshScreenState extends State<SearshScreen> {
               GButton(icon: Icons.home,text: 'Home'),
               GButton(icon: Icons.search,text: 'Search',),
               GButton(icon: Icons.notifications,text: 'Notifications',),
-              GButton(icon: Icons.person,text: 'Profile',),
+              GButton(icon: Icons.settings,text: 'settings',),
             ],
           ),
         ),

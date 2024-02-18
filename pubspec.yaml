@@ -84,6 +84,9 @@ flutter:
     - family: Poppins_med
       fonts:
         - asset: assets/fonts/Poppins-Medium.ttf
+    - family: Poppins_semiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

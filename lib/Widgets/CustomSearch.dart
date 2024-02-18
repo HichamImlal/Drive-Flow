@@ -5,31 +5,29 @@ class CustomSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hiegth = MediaQuery.sizeOf(context).height;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child:  Container(
-        height: hiegth*0.065,
-        width: hiegth*0.51,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(15),
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: "Search here ...",
+        filled: true,
+        fillColor: Colors.grey[300],
+        suffixIcon:const Icon(
+          Icons.search,
+          size: 28,
         ),
-        child:   const Row(
-          children: [
-            SizedBox(width: 5,),
-            CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage('assets/images/person.jpg'),
-            ),
-            SizedBox(width: 20,),
-            Text('What\'s in your mind ?'),
-            Spacer(),
-            Image(image: AssetImage('assets/images/addpic.png'),width: 28,),
-            SizedBox(width: 10,),
-          ],
-        ),
-      ),
+        border: Border(),
+        enabledBorder:  Border(),
+        focusedBorder: Border() ,
+        ) ,
     );
+  }
+
+  // ignore: non_constant_identifier_names
+  OutlineInputBorder Border() {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide:  const BorderSide(
+          color: Colors.white,
+        ),
+      );
   }
 }
