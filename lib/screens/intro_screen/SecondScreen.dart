@@ -5,8 +5,9 @@ class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+    final hieght =MediaQuery.sizeOf(context).height;
     return Padding(
-      padding: const EdgeInsets.only(top: 75),
+      padding:  EdgeInsets.only(top: hieght*0.1),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -22,7 +23,7 @@ class SecondScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20,),
            SizedBox(
-            width: width*0.90,
+            width: width*0.85,
              child:const Text(
               'Lorem ipsum dolor sit amet consectetur. Adipiscing gravida in lacus mollis dignissim aenean. Sagittis vulputate in nam porta. Tellus integer erat elementum senectus.',
               style: TextStyle(
@@ -31,7 +32,7 @@ class SecondScreen extends StatelessWidget {
                   color: Color(0xffAFB5BF)),textAlign: TextAlign.justify,
                      ),
            ),
-           SizedBox(height: width*0.12,),
+           SizedBox(height: hieght*0.03,),
            GestureDetector(
             onTap: ()=>Navigator.pushNamed(context, 'LoginScreen'),
              child: Container(

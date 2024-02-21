@@ -1,6 +1,6 @@
 import 'package:drive_flow_ui/Widgets/CustomDate.dart';
 import 'package:drive_flow_ui/Widgets/CustomNotification.dart';
-import 'package:drive_flow_ui/Widgets/Header.dart';
+import 'package:drive_flow_ui/Widgets/CustomSearch.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -13,20 +13,21 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final height = MediaQuery.sizeOf(context).height;
+    return  Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.only(left: 15,right: 15),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: Header(
-                  text: 'Notification',
-                ),
-              ),
-            Expanded(
+            SizedBox(
+              height: height*0.05,
+            ),
+            const CustomSearch(),
+            const SizedBox(
+              height: 10,
+            ),
+            const Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,4 @@
-import 'package:drive_flow_ui/Widgets/Header.dart';
+import 'package:drive_flow_ui/Widgets/CustomBoxSettings.dart';
 import 'package:drive_flow_ui/Widgets/Text.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +9,10 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.only(left: 15,right: 15,top: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Header(text: 'Settings'),
             SizedBox(height: 20,),
             CustomText(text: 'Account'),
             SizedBox(height: 10,),
@@ -48,71 +47,6 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class CustomBoxSettings extends StatelessWidget {
-  const CustomBoxSettings(
-      {super.key,
-      required this.IconFirst,
-      this.textFirst,
-      required this.IconSecond,
-      this.textSecond});
-  final IconData IconFirst;
-  final textFirst;
-  final IconData IconSecond;
-  final textSecond;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(10)),
-      child: Column(children: [
-        const SizedBox(
-          height: 10,
-        ),
-        CustomSettings(
-          icon: IconFirst,
-          text: textFirst,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        CustomSettings(
-          icon: IconSecond,
-          text: textSecond,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ]),
-    );
-  }
-}
 
-class CustomSettings extends StatelessWidget {
-  const CustomSettings({super.key, required this.icon, this.text});
-  final IconData icon;
-  final text;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12),
-      child: Column(children: [
-        Row(
-          children: [
-            Icon(
-              icon,
-              size: 30,
-            ),
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.06,
-            ),
-            Text(
-              text,
-              style: const TextStyle(fontSize: 18),
-            ),
-          ],
-        ),
-      ]),
-    );
-  }
-}
+
+

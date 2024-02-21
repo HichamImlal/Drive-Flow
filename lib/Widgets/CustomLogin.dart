@@ -17,19 +17,19 @@ class _LoginCustomState extends State<LoginCustom> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: height * 0.65,
-            width: height * 0.44,
+    final width = MediaQuery.sizeOf(context).width;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: width*0.04 ),
+          child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: Colors.grey.withOpacity(0.3),
                   spreadRadius: 5,
                   blurRadius: 7,
                   offset: const Offset(0, 3),
@@ -38,29 +38,25 @@ class _LoginCustomState extends State<LoginCustom> {
             ),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: height*0.01,),
                 const Image(
                   image: AssetImage('assets/images/logo.png'),
                   width: 100,
                 ),
                 const Text(
                   'Login',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                 CustomInput(
+                CustomInput(
                   hint: 'Email',
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                 CustomInput(
+                CustomInput(
                   hint: 'Password',
                 ),
                 Row(
@@ -85,16 +81,17 @@ class _LoginCustomState extends State<LoginCustom> {
                               },
                               activeTrackColor: Colors.blue[200],
                               activeColor: MainColor,
-                              inactiveTrackColor: Colors.grey.withOpacity(0.5),
-                              materialTapTargetSize: MaterialTapTargetSize.padded,
+                              inactiveTrackColor:
+                                  Colors.grey.withOpacity(0.5),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
                             ),
                           ),
                         ),
-                         const Text(
+                        const Text(
                           'Remember me',
-                          style:
-                              TextStyle(fontSize: 13),
-                                               ),
+                          style: TextStyle(fontSize: 13),
+                        ),
                       ],
                     ),
                     const Padding(
@@ -109,7 +106,12 @@ class _LoginCustomState extends State<LoginCustom> {
                 const SizedBox(
                   height: 10,
                 ),
-                ButtonCustom(text:'Login', clicked: () {Navigator.pushNamed(context, 'SearshScreen');  },),
+                ButtonCustom(
+                  text: 'Login',
+                  clicked: () {
+                    Navigator.pushNamed(context, 'SearshScreen');
+                  },
+                ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -130,7 +132,7 @@ class _LoginCustomState extends State<LoginCustom> {
                       width: 10,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, 'SignUpScreen');
                       },
                       child: Text(
@@ -141,12 +143,13 @@ class _LoginCustomState extends State<LoginCustom> {
                       ),
                     ),
                   ],
-                )
+                ),
+                SizedBox(height: height*0.008,)
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

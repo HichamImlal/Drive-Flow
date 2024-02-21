@@ -13,10 +13,10 @@ class ButtonCustom extends StatelessWidget {
     return GestureDetector(
       onTap: clicked,
       child: Container(
-        height: height * 0.07,
-        width: height * 0.27,
+        height: height * 0.06,
+        width: height * 0.23,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(10),
           color: MainColor,
         ),
         child: Center(

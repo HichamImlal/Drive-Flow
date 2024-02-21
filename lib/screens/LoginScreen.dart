@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Center(child: LoginCustom()),
+         const  LoginCustom(),
         ],
       ),
     );
