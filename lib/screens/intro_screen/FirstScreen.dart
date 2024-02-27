@@ -5,7 +5,6 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    final hieght =MediaQuery.sizeOf(context).height;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -33,7 +32,6 @@ class FirstScreen extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
         ),
-        
       ],
     );
   }

@@ -1,7 +1,7 @@
 import 'package:drive_flow_ui/Widgets/CustomListView.dart';
+import 'package:drive_flow_ui/Widgets/CustomSearchCars.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/CustomSearch.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: height*0.05,
             ),
-            const CustomSearch(),
+            const CustomSearchCars(),
             const Expanded(child: CustomListView()),
           ],
         ),
@@ -32,3 +32,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

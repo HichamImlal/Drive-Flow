@@ -34,14 +34,16 @@ class _SearshScreenState extends State<SearshScreen> {
                 index_=indix;
               });
             },
+            color: Colors.black54,
             duration: const Duration(seconds: 0),
-            activeColor: Colors.black54,
+            activeColor: Colors.black,
             selectedIndex: 1,
             padding:const  EdgeInsets.symmetric(horizontal:12,vertical: 5),
-            iconSize: 30,
+            iconSize: 25,
+            textSize: 13,
             style: GnavStyle.oldSchool, 
             tabs:const  [
-              GButton(icon: Icons.home,text: 'Home'),
+              GButton(icon: Icons.home,text: 'Home',),
               GButton(icon: Icons.search,text: 'Search',),
               GButton(icon: Icons.notifications,text: 'Notifications',),
               GButton(icon: Icons.settings,text: 'settings',),

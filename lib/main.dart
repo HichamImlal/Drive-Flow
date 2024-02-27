@@ -1,3 +1,4 @@
+import 'package:drive_flow_ui/screens/EditProfilScreen.dart';
 import 'package:drive_flow_ui/screens/LoginScreen.dart';
 import 'package:drive_flow_ui/controller/ButtomBarMenu.dart';
 import 'package:drive_flow_ui/screens/SignUpScreen.dart';
@@ -22,6 +23,7 @@ class _MyAppState extends State<MyApp> {
         'LoginScreen':(context) => const LoginScreen(),
         'SignUpScreen':(context) => const SignUpScreen(),
         'SearshScreen':(context) => const SearshScreen(),
+        'EditProfilScreen':(context) => const EditProfilScreen(),
       },
       home: const SplashScreen(),
     );
