@@ -1,9 +1,7 @@
 import 'package:drive_flow_ui/Widgets/CustomButton.dart';
 import 'package:drive_flow_ui/Widgets/CustomInput.dart';
 import 'package:drive_flow_ui/Widgets/TitleInput.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class EditProfilScreen extends StatefulWidget {
   const EditProfilScreen({super.key});
