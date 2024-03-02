@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../constant.dart';
+import 'package:provider/provider.dart';
+import '../../constant.dart';
 import 'CustomButton.dart';
 import 'CustomIcons.dart';
 import 'CustomInput.dart';
-
 
 class LoginCustom extends StatefulWidget {
   const LoginCustom({super.key});
@@ -28,8 +29,8 @@ class _LoginCustomState extends State<LoginCustom> {
     _passwordController = TextEditingController();
   }
 
- Future<void> loginUser() async {
-     setState(() {
+  Future<void> loginUser() async {
+    setState(() {
       _isLoading = true;
     });
     var passwordBytes = utf8.encode(_passwordController.text);
@@ -38,15 +39,25 @@ class _LoginCustomState extends State<LoginCustom> {
     var response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': _emailController.text.trim(), 'password': sha256Hash.toString()}),
+      body: jsonEncode({
+        'email': _emailController.text.trim(),
+        'password': sha256Hash.toString()
+      }),
     );
 
-    if (response.statusCode == 200 && response.body.length!=0) {
-        
-        print('Login successful');
+    if (response.statusCode == 200 && response.body.length != 0) {
+      Map<String, dynamic> userData = jsonDecode(response.body);
+      Provider.of<UserDataProvider>(context, listen: false)
+          .setUserData(userData);
+      if(userData['role']==false) {
         Navigator.pushNamed(context, "SearshScreen");
+      }else{
+        Navigator.pushNamed(context, "DashboardAdmin");
+      }
+
     } else {
       print('Login failed');
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Login failed. Please try again.'),
         duration: Duration(seconds: 3),
@@ -56,12 +67,14 @@ class _LoginCustomState extends State<LoginCustom> {
       _isLoading = false;
     });
   }
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
+
   bool _switchValue = false;
   @override
   Widget build(BuildContext context) {
@@ -107,14 +120,15 @@ class _LoginCustomState extends State<LoginCustom> {
                     hint: 'Email',
                     controller: _emailController,
                     validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Enter your email address ?';
-                        }
-                        if (!value.trim().endsWith('@gmail.com')) {
-                          return 'Enter a Gmail address ?';
-                        }
-                        return null;
-                      },
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your email address ?';
+                      }
+                      if (!value.trim().endsWith('@gmail.com') ||
+                          value.trim().length < "@gmail.com".length + 3) {
+                        return 'Enter a Gmail address ?';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -123,13 +137,11 @@ class _LoginCustomState extends State<LoginCustom> {
                     hint: 'Password',
                     controller: _passwordController,
                     validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.length < 9) {
-                          return 'Incorrect Password ?';
-                        }
-                        return null;
-                      },
+                      if (value == null || value.length < 9) {
+                        return 'Password must be between 0 and 9 characters';
+                      }
+                      return null;
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,7 +165,8 @@ class _LoginCustomState extends State<LoginCustom> {
                                 },
                                 activeTrackColor: Colors.blue[200],
                                 activeColor: MainColor,
-                                inactiveTrackColor: Colors.grey.withOpacity(0.5),
+                                inactiveTrackColor:
+                                    Colors.grey.withOpacity(0.5),
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.padded,
                               ),
@@ -179,15 +192,16 @@ class _LoginCustomState extends State<LoginCustom> {
                   ),
                   _isLoading
                       ? CircularProgressIndicator(
-                        color: MainColor,
-                      )
+                          color: MainColor,
+                        )
                       : ButtonCustom(
-                    text: 'Login',
-                    clicked: () {
-                      if (_formKey.currentState!.validate()) {
-                      loginUser();
-                  }
-                    },),
+                          text: 'Login',
+                          clicked: () {
+                            if (_formKey.currentState!.validate()) {
+                              loginUser();
+                            }
+                          },
+                        ),
                   const SizedBox(
                     height: 15,
                   ),

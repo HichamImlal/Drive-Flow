@@ -1,5 +1,5 @@
-import 'package:drive_flow_ui/screens/intro_screen/FirstScreen.dart';
-import 'package:drive_flow_ui/screens/intro_screen/SecondScreen.dart';
+import 'package:drive_flow_ui/user/screens/intro_screen/FirstScreen.dart';
+import 'package:drive_flow_ui/user/screens/intro_screen/SecondScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

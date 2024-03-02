@@ -1,6 +1,6 @@
-import 'package:drive_flow_ui/Widgets/CustomDate.dart';
-import 'package:drive_flow_ui/Widgets/CustomNotification.dart';
-import 'package:drive_flow_ui/Widgets/CustomSearch.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomDate.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomNotification.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomSearch.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:drive_flow_ui/Widgets/CustomIcons.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomIcons.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -56,7 +56,8 @@ class _SignUpCustomState extends State<SignUpCustom> {
       body: jsonEncode({
         'username': _username.text,
         'email': _emailController.text.trim(),
-        'password': sha256Hash.toString()
+        'password': sha256Hash.toString(),
+        'role':false,
       }),
     );
 
@@ -134,7 +135,7 @@ class _SignUpCustomState extends State<SignUpCustom> {
                       hint: 'Username',
                       controller: _username,
                       validator: (value) {
-                        if (value == null || value.isEmpty || value.length<9) {
+                        if (value == null || value.isEmpty || value.length<8) {
                           return 'Entrer your Username?';
                         }
                         return null;
@@ -166,7 +167,7 @@ class _SignUpCustomState extends State<SignUpCustom> {
                         if (value == null ||
                             value.isEmpty ||
                             value.length < 9) {
-                          return 'Incorrect Password ?';
+                          return 'Password must be between 0 and 9 characters';
                         }
                         return null;
                       },

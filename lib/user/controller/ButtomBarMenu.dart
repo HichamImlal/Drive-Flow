@@ -1,6 +1,6 @@
 // ignore: file_names
-import "package:drive_flow_ui/screens/NotificationScreen.dart";
-import "package:drive_flow_ui/screens/SettingsScreen.dart";
+import "package:drive_flow_ui/user/screens/NotificationScreen.dart";
+import "package:drive_flow_ui/user/screens/SettingsScreen.dart";
 import "package:flutter/material.dart";
 import "package:google_nav_bar/google_nav_bar.dart";
 import "../screens/HomeScreen.dart";

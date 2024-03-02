@@ -1,8 +1,10 @@
-import 'package:drive_flow_ui/screens/EditProfilScreen.dart';
-import 'package:drive_flow_ui/screens/LoginScreen.dart';
-import 'package:drive_flow_ui/controller/ButtomBarMenu.dart';
-import 'package:drive_flow_ui/screens/SignUpScreen.dart';
-import 'package:drive_flow_ui/screens/SplashScreen.dart';
+import 'package:drive_flow_ui/admin/screens/DashboardAdmin.dart';
+import 'package:drive_flow_ui/user/controller/ButtomBarMenu.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
+import 'package:drive_flow_ui/user/screens/LoginScreen.dart';
+import 'package:drive_flow_ui/user/screens/SignUpScreen.dart';
+import 'package:drive_flow_ui/user/screens/SplashScreen.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,16 +18,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Poppins_med'),
-      routes: {
-        'LoginScreen':(context) => const LoginScreen(),
-        'SignUpScreen':(context) => const SignUpScreen(),
-        'SearshScreen':(context) => const SearshScreen(),
-        'EditProfilScreen':(context) => const EditProfilScreen(),
-      },
-      home: const SplashScreen(),
+    return   ChangeNotifierProvider(
+      create: (context) => UserDataProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Poppins_med'),
+        routes: {
+          'LoginScreen':(context) => const LoginScreen(),
+          'SignUpScreen':(context) => const SignUpScreen(),
+          'SearshScreen':(context) => const SearshScreen(),
+          'DashboardAdmin':(context) =>const DashboardAdmin(),
+        },
+        home: const SplashScreen(),
+      ),
     );
   }
 }

@@ -1,9 +1,8 @@
-import 'package:drive_flow_ui/Widgets/CustomSettings.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomSettings.dart';
 import 'package:flutter/material.dart';
 
-
-
 class CustomBoxSettings extends StatelessWidget {
+  final VoidCallback ? clicked;
   const CustomBoxSettings(
       {super.key,
       // ignore: non_constant_identifier_names
@@ -11,15 +10,16 @@ class CustomBoxSettings extends StatelessWidget {
       this.textFirst,
       // ignore: non_constant_identifier_names
       required this.IconSecond,
-      this.textSecond});
+      this.textSecond,
+       this.clicked});
   // ignore: non_constant_identifier_names
   final IconData IconFirst;
   // ignore: prefer_typing_uninitialized_variables
-  final textFirst;
+  final dynamic textFirst;
   // ignore: non_constant_identifier_names
   final IconData IconSecond;
   // ignore: prefer_typing_uninitialized_variables
-  final textSecond;
+  final dynamic textSecond;
   @override
   Widget build(BuildContext context) {
     return Container(

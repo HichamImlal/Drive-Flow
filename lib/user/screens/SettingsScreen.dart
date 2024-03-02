@@ -1,5 +1,5 @@
-import 'package:drive_flow_ui/Widgets/CustomBoxSettings.dart';
-import 'package:drive_flow_ui/Widgets/Text.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomBoxSettings.dart';
+import 'package:drive_flow_ui/user/Widgets/Text.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -7,7 +7,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  const Scaffold(
       body: Padding(
         padding: EdgeInsets.only(left: 15,right: 15,top: 40),
         child: Column(
