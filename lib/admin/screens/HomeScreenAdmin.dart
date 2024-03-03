@@ -1,5 +1,7 @@
 import 'package:drive_flow_ui/admin/Widgets/CustomDrawer.dart';
 import 'package:drive_flow_ui/admin/Widgets/Header.dart';
+import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
+import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomListView.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,18 @@ class HomeScreenAdmin extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return  Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: MainColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        onPressed: () {
+          Navigator.pushNamed(context, "AddPostAdmin");
+        },
+        child: const Icon(
+          Icons.add,
+          size: 28,
+          color: Colors.white,
+        ),
+      ),
       backgroundColor: Colors.white,
       key: _scaffoldKey,
       drawer: CustomDrawer(height: height, width: width),
@@ -24,7 +38,7 @@ class HomeScreenAdmin extends StatelessWidget {
               height: height * 0.05,
             ),
             Header(width: width, scaffoldKey: _scaffoldKey,text: "Home",),
-            const Expanded(child: CustomListView()),
+            const Expanded(child: CustomListView(isAdmin: true,)),
           ],
         ),
       ),

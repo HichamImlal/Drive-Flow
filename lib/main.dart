@@ -1,3 +1,4 @@
+import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/admin/screens/DashboardAdmin.dart';
 import 'package:drive_flow_ui/admin/screens/HomeScreenAdmin.dart';
 import 'package:drive_flow_ui/user/controller/ButtomBarMenu.dart';
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
           'SearshScreen':(context) => const SearshScreen(),
           'DashboardAdmin':(context) =>const DashboardAdmin(),
           'HomeScreenAdmin':(context) =>const HomeScreenAdmin(),
+          'AddPostAdmin':(context) =>const AddPostAdmin(),
         },
         home: const SplashScreen(),
       ),

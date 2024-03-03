@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 
 class CustomListView extends StatefulWidget {
-  const CustomListView({super.key});
+  const CustomListView({super.key, required this.isAdmin});
+  final bool isAdmin;
 
   @override
   State<CustomListView> createState() => _CustomListViewState();
@@ -18,9 +19,9 @@ class _CustomListViewState extends State<CustomListView> {
       child: ListView.builder(
         padding: EdgeInsets.zero,
           itemCount: 3,
-          itemBuilder: (context, index) => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: CustomCard(),
+          itemBuilder: (context, index) => Padding(
+                padding:const  EdgeInsets.symmetric(vertical: 4),
+                child: CustomCard(isAdmin: widget.isAdmin,),
               )),
     );
   }
