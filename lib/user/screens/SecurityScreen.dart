@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomInput.dart';
+import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
 import 'package:drive_flow_ui/user/Widgets/TitleInput.dart';
 import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
@@ -80,29 +81,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
               SizedBox(
                 height: height * 0.05,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: width * 0.035,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Image(
-                      image: const AssetImage("assets/images/arrow.png"),
-                      width: width * 0.06,
-                    ),
-                  ),
-                  SizedBox(
-                    width: width * 0.2,
-                  ),
-                  const Text(
-                    'Edit password',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ],
-              ),
+              HeaderSettings(width: width,text: "Edit Password",),
               SizedBox(
                 height: height * 0.05,
               ),

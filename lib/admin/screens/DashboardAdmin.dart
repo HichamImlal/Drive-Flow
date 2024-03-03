@@ -19,7 +19,10 @@ class DashboardAdmin extends StatelessWidget {
           SizedBox(
             height: height * 0.05,
           ),
-          Header(width: width, scaffoldKey: _scaffoldKey,text: "Dashboard",),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Header(width: width, scaffoldKey: _scaffoldKey,text: "Dashboard",),
+          ),
         ],
       ),
     );
