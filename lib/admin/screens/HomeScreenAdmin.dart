@@ -1,6 +1,5 @@
 import 'package:drive_flow_ui/admin/Widgets/CustomDrawer.dart';
 import 'package:drive_flow_ui/admin/Widgets/Header.dart';
-import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomListView.dart';
 import 'package:flutter/material.dart';

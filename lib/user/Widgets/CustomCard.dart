@@ -1,16 +1,25 @@
 import 'package:drive_flow_ui/constant.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   final bool isAdmin;
   const CustomCard({
     super.key,
     this.isAdmin = false,
   });
+   
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
 
+class _CustomCardState extends State<CustomCard> {
+  bool _isFavorite = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: (){
+        
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -37,9 +46,25 @@ class CustomCard extends StatelessWidget {
                   'ECOBOOST',
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
                 ),
-                trailing: isAdmin
-                    ? const Icon(Icons.edit,size: 30,)
-                    : const Icon(Icons.favorite_border),
+                trailing: widget.isAdmin
+                    ? const Icon(
+                        Icons.edit,
+                        size: 30,
+                      )
+                    : IconButton(
+                        icon: _isFavorite
+                            ? const Icon(Icons.favorite_border)
+                            // ignore: dead_code
+                            : const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                        onPressed: () {
+                          setState(() {
+                            _isFavorite = !_isFavorite;
+                          });
+                        },
+                      ),
               ),
             ),
             Padding(
@@ -47,7 +72,7 @@ class CustomCard extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '\$50',
+                    '500 MAD',
                     style: TextStyle(fontSize: 25, color: MainColor),
                   ),
                   const SizedBox(

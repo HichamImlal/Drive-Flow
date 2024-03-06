@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     package="com.example.drive_flow_ui"
-    <!-- Internet permission -->
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="drive_flow_ui"

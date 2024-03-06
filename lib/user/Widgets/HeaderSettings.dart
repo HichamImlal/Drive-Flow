@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 class HeaderSettings extends StatelessWidget {
   const HeaderSettings({
     super.key,
-    required this.width, this.text,
+    required this.width, this.text, this.padding,
   });
 
   final double width;
   final text;
+  final padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal:padding ?? 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
