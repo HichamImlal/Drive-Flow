@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:drive_flow_ui/class/Car.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
@@ -43,56 +41,6 @@ class _AddPostAdminState extends State<AddPostAdmin> {
   }
 
   bool _isLoading = false;
-
-
- Future<void> _addPost() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
-
-      try {
-        var url = Uri.parse("http://${ipAddress}:8080/posts");
-
-        var request = http.MultipartRequest('POST', url);
-        request.fields['mark'] = _mark.text;
-        request.fields['price'] = _price.text;
-        request.fields['model'] = _model.text;
-        request.fields['description'] = _description.text;
-
-        if (_imageFile != null) {
-          var imageBytes = await _imageFile!.readAsBytes();
-          var multipartFile = http.MultipartFile.fromBytes(
-            'image',
-            imageBytes,
-            filename: _imageFile!.path.split('/').last,
-          );
-          request.files.add(multipartFile);
-        }
-
-        var response = await request.send();
-
-        if (response.statusCode == 201) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Posted successfully'),
-            duration: Duration(seconds: 3),
-          ));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Error, please check data'),
-            duration: Duration(seconds: 3),
-          ));
-        }
-      } catch (e) {
-        print('Failed to add post. Error: $e');
-      }
-
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   File? _imageFile;
 
   Future<void> _pickImage() async {
@@ -105,7 +53,25 @@ class _AddPostAdminState extends State<AddPostAdmin> {
       });
     }
   }
-
+Future<void> _addPost() async {
+    final url = Uri.parse('http://${ipAddress}:8080/addPost');
+    var request = http.MultipartRequest('POST', url);
+    request.fields['mark'] = _mark.text;
+    request.fields['price'] = _price.text;
+    request.fields['model'] = _model.text;
+    request.fields['description'] = _description.text;
+    if (_imageFile != null) {
+      request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
+    } else {
+      print("image is null");
+    }
+    var response = await request.send();
+    if (response.statusCode == 201) {
+      print('Post saved successfully');
+    } else {
+      print('Failed to save post');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

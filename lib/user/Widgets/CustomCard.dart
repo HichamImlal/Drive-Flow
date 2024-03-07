@@ -7,9 +7,12 @@ class CustomCard extends StatefulWidget {
   final bool isAdmin;
   const CustomCard({
     super.key,
-    this.isAdmin = false,
+    this.isAdmin = false, this.mark, this.model, this.price, this.description,
   });
-
+  final mark;
+  final model;
+  final price;
+  final description;
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
@@ -40,13 +43,13 @@ class _CustomCardState extends State<CustomCard> {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.08,
               child: ListTile(
-                title: const Text(
-                  'Chevy Camaro',
-                  style: TextStyle(fontSize: 20),
+                title:  Text(
+                  widget.mark,
+                  style: const TextStyle(fontSize: 20),
                 ),
-                subtitle: const Text(
-                  'ECOBOOST',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
+                subtitle:  Text(
+                  widget.model,
+                  style: const TextStyle(fontFamily: 'Poppins', fontSize: 14),
                 ),
                 trailing: widget.isAdmin
                     ? const Icon(
@@ -74,7 +77,7 @@ class _CustomCardState extends State<CustomCard> {
               child: Row(
                 children: [
                   Text(
-                    '500 MAD',
+                     "${widget.price} MAD",
                     style: TextStyle(fontSize: 25, color: MainColor),
                   ),
                   const SizedBox(
@@ -114,10 +117,10 @@ class _CustomCardState extends State<CustomCard> {
                     child: SizedBox(
                       width: MediaQuery.sizeOf(context).width -
                           MediaQuery.sizeOf(context).width * 0.3,
-                      child: const Text(
-                        'A sleek, midnight blue sedan with aerodynamic curves, boasting a powerful hybrid engine and advanced safety features for a smooth .',
+                      child:  Text(
+                        widget.description,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 10),
+                        style: const TextStyle(fontSize: 10),
                       ),
                     ),
                   ),
