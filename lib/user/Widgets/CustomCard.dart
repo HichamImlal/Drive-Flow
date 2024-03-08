@@ -1,4 +1,5 @@
 import 'package:drive_flow_ui/admin/Widgets/CustomDetails.dart';
+import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showLogoutDialog(context);
+        _showDetailsDialog(context);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -52,10 +53,13 @@ class _CustomCardState extends State<CustomCard> {
                   style: const TextStyle(fontFamily: 'Poppins', fontSize: 14),
                 ),
                 trailing: widget.isAdmin
-                    ? const Icon(
-                        Icons.edit,
-                        size: 30,
-                      )
+                    ? IconButton(
+                     onPressed: () {  _showEditDialog(context);},
+                     icon: const Icon(
+                          Icons.edit,
+                          size: 30,
+                        ),
+                    )
                     : IconButton(
                         icon: _isFavorite
                             ? const Icon(Icons.favorite_border)
@@ -138,7 +142,7 @@ class _CustomCardState extends State<CustomCard> {
 
   bool _isfavorite = true;
 
-  void _showLogoutDialog(BuildContext context) {
+  void _showDetailsDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -277,6 +281,20 @@ class _CustomCardState extends State<CustomCard> {
                 ),
               ),
             );
+          },
+        );
+      },
+    );
+  }
+  void _showEditDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final width = MediaQuery.of(context).size.width;
+        final height = MediaQuery.of(context).size.height;
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return const AddPostAdmin(isInEditPost: true,text: "Edit Post",isEdit: true,);
           },
         );
       },

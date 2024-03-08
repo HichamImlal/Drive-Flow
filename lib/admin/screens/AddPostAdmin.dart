@@ -8,7 +8,10 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class AddPostAdmin extends StatefulWidget {
-  const AddPostAdmin({super.key});
+  const AddPostAdmin({super.key, this.text, this.isInEditPost=false, this.isEdit=false});
+  final text;
+  final isInEditPost;
+  final isEdit;
 
   @override
   State<AddPostAdmin> createState() => _AddPostAdminState();
@@ -54,6 +57,10 @@ class _AddPostAdminState extends State<AddPostAdmin> {
     }
   }
 Future<void> _addPost() async {
+  setState(() {
+      _isLoading = true;
+    });
+    await Future.delayed(Duration(seconds: 2));
     final url = Uri.parse('http://${ipAddress}:8080/addPost');
     var request = http.MultipartRequest('POST', url);
     request.fields['mark'] = _mark.text;
@@ -67,10 +74,17 @@ Future<void> _addPost() async {
     }
     var response = await request.send();
     if (response.statusCode == 201) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Post saved successfully.'),
+        duration: Duration(seconds: 3),
+      ));
       print('Post saved successfully');
     } else {
       print('Failed to save post');
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -84,7 +98,7 @@ Future<void> _addPost() async {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.037),
             child: SizedBox(
-              height: height,
+              height:widget.isInEditPost? height*0.9:height,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -96,7 +110,8 @@ Future<void> _addPost() async {
                     HeaderSettings(
                       padding: 0.0,
                       width: width,
-                      text: "Add Post",
+                      text: widget.text ?? "Add Post",
+                      isEdit: widget.isEdit,
                     ),
                     SizedBox(
                       height: height * 0.05,
@@ -133,7 +148,7 @@ Future<void> _addPost() async {
                                 )),
                     ),
                     SizedBox(
-                      height: height * 0.1,
+                      height:widget.isInEditPost ? height * 0.03:height * 0.1,
                     ),
                     Row(
                       children: [
@@ -213,7 +228,7 @@ Future<void> _addPost() async {
                               _addPost();
                             }
                           },
-                          text: "Post",
+                          text: widget.isInEditPost?"Edit":"Post",
                           isPost: false,
                         ),
                     )
