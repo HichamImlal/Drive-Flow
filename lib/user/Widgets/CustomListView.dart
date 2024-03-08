@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:drive_flow_ui/class/Car.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomCard.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class CustomListView extends StatefulWidget {
-  const CustomListView({super.key, required this.isAdmin});
+  const CustomListView({super.key,  this.isAdmin=true});
   final bool isAdmin;
 
   @override
@@ -19,10 +22,9 @@ class _CustomListViewState extends State<CustomListView> {
   @override
   void initState() {
     super.initState();
-    fetchPosts();
+   widget.isAdmin?fetchPosts():fetchPostsUsers();
   }
-
-  void fetchPosts() async {
+  void fetchPostsUsers() async {
     final url = Uri.parse('http://${ipAddress}:8080/getAllPosts');
     final response = await http.get(url);
 
@@ -31,7 +33,22 @@ class _CustomListViewState extends State<CustomListView> {
       setState(() {
         posts = data.map((post) => Car.fromJson(post)).toList();
       });
-      print(posts.length);
+    } else {
+      throw Exception('Failed to load posts');
+    }
+  }
+  void fetchPosts() async {
+    final userData =
+        Provider.of<UserDataProvider>(context, listen: false).userData;
+    final url = Uri.parse(
+        'http://${ipAddress}:8080/getByIdAdmin/${userData!['id'].toString()}');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      setState(() {
+        posts = data.map((post) => Car.fromJson(post)).toList();
+      });
     } else {
       throw Exception('Failed to load posts');
     }
@@ -52,6 +69,7 @@ class _CustomListViewState extends State<CustomListView> {
                   model: posts[index].model,
                   price: posts[index].price,
                   description: posts[index].description,
+                  image: posts[index].image,
                 ),
               )),
     );

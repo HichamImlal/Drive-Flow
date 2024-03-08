@@ -41,8 +41,8 @@ class CustomDrawer extends StatelessWidget {
           ),
           CustomMenu(
             width: width,
-            pathImage: "assets/images/operation.png",
-            text: "Manage Cars",
+            pathImage: "assets/images/notification.png",
+            text: "Notification",
           ),
           CustomMenu(
             width: width,

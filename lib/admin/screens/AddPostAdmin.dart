@@ -3,9 +3,11 @@ import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
 import 'package:drive_flow_ui/user/Widgets/InputButtomSheet.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddPostAdmin extends StatefulWidget {
   const AddPostAdmin({super.key, this.text, this.isInEditPost=false, this.isEdit=false});
@@ -34,14 +36,15 @@ class _AddPostAdminState extends State<AddPostAdmin> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    _mark = TextEditingController();
-    _price = TextEditingController();
-    _model = TextEditingController();
-    _description = TextEditingController();
-    super.initState();
-  }
+ @override
+void initState() {
+  _mark = TextEditingController();
+  _price = TextEditingController();
+  _model = TextEditingController();
+  _description = TextEditingController();
+  final userData = Provider.of<UserDataProvider>(context, listen: false).userData;
+  super.initState();
+}
 
   bool _isLoading = false;
   File? _imageFile;
@@ -61,16 +64,22 @@ Future<void> _addPost() async {
       _isLoading = true;
     });
     await Future.delayed(Duration(seconds: 2));
+    final userData = Provider.of<UserDataProvider>(context, listen: false).userData;
     final url = Uri.parse('http://${ipAddress}:8080/addPost');
     var request = http.MultipartRequest('POST', url);
     request.fields['mark'] = _mark.text;
     request.fields['price'] = _price.text;
     request.fields['model'] = _model.text;
+    request.fields['id_admin']=userData!["id"].toString();
     request.fields['description'] = _description.text;
-    if (_imageFile != null) {
-      request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
+     if (_imageFile != null) {
+      if (await _imageFile!.exists()) {
+        request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
+      } else {
+        print("Image file does not exist");
+      }
     } else {
-      print("image is null");
+      print("Image is null");
     }
     var response = await request.send();
     if (response.statusCode == 201) {

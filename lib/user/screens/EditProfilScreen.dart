@@ -79,7 +79,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
               SizedBox(
                 height: height * 0.05,
               ),
-              HeaderSettings(width: width,text: "Edit Profile",),
+              HeaderSettings(width: width,text: "Edit Profile",isEdit: false,),
               SizedBox(
                 height: height * 0.1,
               ),
@@ -115,6 +115,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                 height: height * 0.003,
               ),
               CustomInput(
+
                 controller: _username,
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 8) {
@@ -142,6 +143,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
               ),
               Center(
                   child: ButtonCustom(
+                    isPost: true,
                 text: "Save",
                 clicked: () {
                   if (_formKey.currentState!.validate()) {

@@ -45,7 +45,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
       'password': sha256Hash.toString(),
       'role': false,
     };
-     print(requestBody);
+    print(requestBody);
     final response = await http.put(
       Uri.parse(apiUrl),
       headers: <String, String>{
@@ -81,7 +81,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
               SizedBox(
                 height: height * 0.05,
               ),
-              HeaderSettings(width: width,text: "Edit Password",),
+              HeaderSettings(
+                isEdit: false,
+                width: width,
+                text: "Edit Password",
+              ),
               SizedBox(
                 height: height * 0.05,
               ),
@@ -151,6 +155,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
               ),
               Center(
                   child: ButtonCustom(
+                isPost: true,
                 text: "Save",
                 clicked: () {
                   var passwordBytes = utf8.encode(_oldPassword.text.trim());

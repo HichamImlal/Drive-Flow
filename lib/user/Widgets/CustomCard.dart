@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:drive_flow_ui/admin/Widgets/CustomDetails.dart';
 import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/constant.dart';
@@ -8,12 +10,18 @@ class CustomCard extends StatefulWidget {
   final bool isAdmin;
   const CustomCard({
     super.key,
-    this.isAdmin = false, this.mark, this.model, this.price, this.description,
+    this.isAdmin = false,
+    this.mark,
+    this.model,
+    this.price,
+    this.description,
+    required this.image,
   });
   final mark;
   final model;
   final price;
   final description;
+  final Uint8List image;
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
@@ -22,9 +30,10 @@ class _CustomCardState extends State<CustomCard> {
   bool _isFavorite = true;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     return GestureDetector(
       onTap: () {
-        _showDetailsDialog(context);
+      widget.isAdmin?(){}:_showDetailsDialog(context);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -44,22 +53,24 @@ class _CustomCardState extends State<CustomCard> {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.08,
               child: ListTile(
-                title:  Text(
+                title: Text(
                   widget.mark,
                   style: const TextStyle(fontSize: 20),
                 ),
-                subtitle:  Text(
+                subtitle: Text(
                   widget.model,
                   style: const TextStyle(fontFamily: 'Poppins', fontSize: 14),
                 ),
                 trailing: widget.isAdmin
                     ? IconButton(
-                     onPressed: () {  _showEditDialog(context);},
-                     icon: const Icon(
+                        onPressed: () {
+                          _showEditDialog(context);
+                        },
+                        icon: const Icon(
                           Icons.edit,
                           size: 30,
                         ),
-                    )
+                      )
                     : IconButton(
                         icon: _isFavorite
                             ? const Icon(Icons.favorite_border)
@@ -81,7 +92,7 @@ class _CustomCardState extends State<CustomCard> {
               child: Row(
                 children: [
                   Text(
-                     "${widget.price} MAD",
+                    "${widget.price} MAD",
                     style: TextStyle(fontSize: 25, color: MainColor),
                   ),
                   const SizedBox(
@@ -101,9 +112,11 @@ class _CustomCardState extends State<CustomCard> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 19),
-              child: Image(image: AssetImage('assets/images/car1.png')),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 19),
+              child: Container(
+                height: height*0.2,
+                child: Image.memory(widget.image)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 19),
@@ -121,7 +134,7 @@ class _CustomCardState extends State<CustomCard> {
                     child: SizedBox(
                       width: MediaQuery.sizeOf(context).width -
                           MediaQuery.sizeOf(context).width * 0.3,
-                      child:  Text(
+                      child: Text(
                         widget.description,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 10),
@@ -255,10 +268,12 @@ class _CustomCardState extends State<CustomCard> {
                       "specification :",
                       style: TextStyle(fontFamily: "Poppins_med"),
                     ),
-                   const  Text(
+                    const Text(
                       'A sleek, midnight blue sedan with aerodynamic curves, boasting a powerful hybrid engine and advanced safety features for a smooth .',
                     ),
-                    SizedBox(height: height*0.065,),
+                    SizedBox(
+                      height: height * 0.065,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -267,14 +282,19 @@ class _CustomCardState extends State<CustomCard> {
                           children: [
                             const Text(
                               "Price : ",
-                              style: TextStyle(fontSize: 18,fontFamily: "Poppins_med"),
+                              style: TextStyle(
+                                  fontSize: 18, fontFamily: "Poppins_med"),
                             ),
                             Text(
-                              "500 MAD",style: TextStyle(fontSize: 22,color: MainColor),
+                              "500 MAD",
+                              style: TextStyle(fontSize: 22, color: MainColor),
                             ),
                           ],
                         ),
-                        ButtonCustom(clicked: (){},text: "Rent Car",)
+                        ButtonCustom(
+                          clicked: () {},
+                          text: "Rent Car",
+                        )
                       ],
                     ),
                   ],
@@ -286,6 +306,7 @@ class _CustomCardState extends State<CustomCard> {
       },
     );
   }
+
   void _showEditDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -294,11 +315,14 @@ class _CustomCardState extends State<CustomCard> {
         final height = MediaQuery.of(context).size.height;
         return StatefulBuilder(
           builder: (context, setState) {
-            return const AddPostAdmin(isInEditPost: true,text: "Edit Post",isEdit: true,);
+            return const AddPostAdmin(
+              isInEditPost: true,
+              text: "Edit Post",
+              isEdit: true,
+            );
           },
         );
       },
     );
   }
 }
-

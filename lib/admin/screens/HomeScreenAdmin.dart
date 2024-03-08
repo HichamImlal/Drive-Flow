@@ -13,6 +13,7 @@ class HomeScreenAdmin extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return  Scaffold(
+      backgroundColor: Colors.grey[200],
       floatingActionButton: FloatingActionButton(
         backgroundColor: MainColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
@@ -25,7 +26,6 @@ class HomeScreenAdmin extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      backgroundColor: Colors.white,
       key: _scaffoldKey,
       drawer: CustomDrawer(height: height, width: width),
       body: Padding(
