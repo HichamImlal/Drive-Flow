@@ -3,6 +3,7 @@ import 'package:drive_flow_ui/admin/screens/DashboardAdmin.dart';
 import 'package:drive_flow_ui/admin/screens/HomeScreenAdmin.dart';
 import 'package:drive_flow_ui/user/controller/ButtomBarMenu.dart';
 import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
+import 'package:drive_flow_ui/user/screens/EditProfilScreen.dart';
 import 'package:drive_flow_ui/user/screens/LoginScreen.dart';
 import 'package:drive_flow_ui/user/screens/SignUpScreen.dart';
 import 'package:drive_flow_ui/user/screens/SplashScreen.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
           'DashboardAdmin':(context) =>const DashboardAdmin(),
           'HomeScreenAdmin':(context) =>const HomeScreenAdmin(),
           'AddPostAdmin':(context) =>const AddPostAdmin(),
+          'EditProfilScreen':(context) => const EditProfilScreen(),
         },
         home: const SplashScreen(),
       ),

@@ -63,7 +63,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
       Provider.of<UserDataProvider>(context, listen: false)
           ?.updateUserData(requestBody);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('User updated successfully'),
+        content: Text('Profile updated successfully'),
         duration: Duration(seconds: 3),
       ));
     } else {
@@ -73,7 +73,6 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
       ));
     }
   }
-
   Future<void> _updateUserImage(File imageFile) async {
     final userData =
         Provider.of<UserDataProvider>(context, listen: false)?.userData;
@@ -98,6 +97,10 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
           userData['image'] = base64Encode(imageData!);
           Provider.of<UserDataProvider>(context, listen: false)
               ?.updateUserData(userData);
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Your image updated successfully'),
+        duration: Duration(seconds: 3),
+      ));
           print('User image updated successfully');
         } else {
           print('Failed to fetch updated image data');
@@ -180,12 +183,8 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                                   height: width * 0.35,
                                   width: width * 0.35,
                                   child: CircleAvatar(
-                                    child: SizedBox(
-                                        width: width * 0.2,
-                                        child: Image(
-                                          image: AssetImage(
+                                    backgroundImage: AssetImage(
                                               "assets/images/addpic.png"),
-                                        )),
                                   ),
                                 ),
                               )

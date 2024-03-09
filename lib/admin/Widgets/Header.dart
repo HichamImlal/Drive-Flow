@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 
 
@@ -31,8 +32,13 @@ class Header extends StatelessWidget {
         text,
         style: const TextStyle(fontSize: 25),
       ),
-      const CircleAvatar(
-        backgroundImage: AssetImage("assets/images/admin.jpg"),
+      GestureDetector(
+        onTap: (){
+          Navigator.pushNamed(context, "EditProfilScreen");
+        },
+        child: const CircleAvatar(
+          backgroundImage: AssetImage("assets/images/admin.jpg"),
+        ),
       )
     ],
             );
