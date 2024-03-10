@@ -1,4 +1,5 @@
 import 'package:drive_flow_ui/user/Widgets/ButtomSheet.dart';
+import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchCars extends StatelessWidget {
@@ -11,7 +12,19 @@ class CustomSearchCars extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
-            context: context, builder: (context) => const ButtomSheet());
+            context: context,
+            builder: (context) => Column(
+                  children: [
+                    const ButtomSheet(),
+                    SizedBox(
+                      height: height * 0.04,
+                    ),
+                    Center(child: ButtonCustom(text: "Save", clicked: () {})),
+                    SizedBox(
+                      height: height * 0.04,
+                    ),
+                  ],
+                ));
       },
       child: Container(
         width: width * 0.9,
@@ -52,7 +65,3 @@ class CustomSearchCars extends StatelessWidget {
     );
   }
 }
-
-
-
-

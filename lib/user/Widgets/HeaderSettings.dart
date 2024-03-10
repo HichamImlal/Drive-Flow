@@ -30,7 +30,7 @@ class HeaderSettings extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(fontSize: 25),
+            style: const TextStyle(fontSize: 25,fontFamily: "Poppins_med"),
           ),
           isEdit? Image(image:const AssetImage("assets/images/trash.png"),width: width*0.07,):SizedBox(width: width * 0.06,),
         ],

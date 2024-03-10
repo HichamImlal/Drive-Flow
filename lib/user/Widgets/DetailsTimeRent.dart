@@ -1,9 +1,9 @@
-import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
 import 'package:drive_flow_ui/user/Widgets/InputButtomSheet.dart';
 import 'package:flutter/material.dart';
 
-class ButtomSheet extends StatelessWidget {
-  const ButtomSheet({super.key});
+class DetailsTimeRent extends StatelessWidget {
+  const DetailsTimeRent({super.key});
+  
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -23,10 +23,6 @@ class ButtomSheet extends StatelessWidget {
             ),
             SizedBox(
               height: height * 0.009,
-            ),
-            const InputButtomSheet(
-              hint: "Location",
-              icon: Icons.location_on,
             ),
             SizedBox(
               height: height * 0.01,
@@ -63,10 +59,6 @@ class ButtomSheet extends StatelessWidget {
             ),
             SizedBox(
               height: height * 0.009,
-            ),
-            const InputButtomSheet(
-              hint: "Location",
-              icon: Icons.location_on,
             ),
             SizedBox(
               height: height * 0.01,

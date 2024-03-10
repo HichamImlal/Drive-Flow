@@ -10,7 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AddPostAdmin extends StatefulWidget {
-  const AddPostAdmin({super.key, this.text, this.isInEditPost=false, this.isEdit=false});
+  const AddPostAdmin(
+      {super.key, this.text, this.isInEditPost = false, this.isEdit = false});
   final text;
   final isInEditPost;
   final isEdit;
@@ -36,15 +37,16 @@ class _AddPostAdminState extends State<AddPostAdmin> {
     super.dispose();
   }
 
- @override
-void initState() {
-  _mark = TextEditingController();
-  _price = TextEditingController();
-  _model = TextEditingController();
-  _description = TextEditingController();
-  final userData = Provider.of<UserDataProvider>(context, listen: false).userData;
-  super.initState();
-}
+  @override
+  void initState() {
+    _mark = TextEditingController();
+    _price = TextEditingController();
+    _model = TextEditingController();
+    _description = TextEditingController();
+    final userData =
+        Provider.of<UserDataProvider>(context, listen: false).userData;
+    super.initState();
+  }
 
   bool _isLoading = false;
   File? _imageFile;
@@ -59,22 +61,26 @@ void initState() {
       });
     }
   }
-Future<void> _addPost() async {
-  setState(() {
+
+  Future<void> _addPost() async {
+    setState(() {
       _isLoading = true;
     });
     await Future.delayed(Duration(seconds: 2));
-    final userData = Provider.of<UserDataProvider>(context, listen: false).userData;
+    final userData =
+        Provider.of<UserDataProvider>(context, listen: false).userData;
     final url = Uri.parse('http://${ipAddress}:8080/addPost');
     var request = http.MultipartRequest('POST', url);
     request.fields['mark'] = _mark.text;
     request.fields['price'] = _price.text;
     request.fields['model'] = _model.text;
-    request.fields['id_admin']=userData!["id"].toString();
+    request.fields['id_admin'] = userData!["id"].toString();
     request.fields['description'] = _description.text;
-     if (_imageFile != null) {
+    request.fields['available'] = 'true';
+    if (_imageFile != null) {
       if (await _imageFile!.exists()) {
-        request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
+        request.files
+            .add(await http.MultipartFile.fromPath('image', _imageFile!.path));
       } else {
         print("Image file does not exist");
       }
@@ -107,141 +113,144 @@ Future<void> _addPost() async {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.037),
             child: SizedBox(
-              height:widget.isInEditPost? height*0.9:height,
+              height: widget.isInEditPost ? height * 0.9 : height,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      height: height * 0.05,
-                    ),
-                    HeaderSettings(
-                      padding: 0.0,
-                      width: width,
-                      text: widget.text ?? "Add Post",
-                      isEdit: widget.isEdit,
-                    ),
-                    SizedBox(
-                      height: height * 0.05,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _pickImage();
-                      },
-                      child: Container(
-                          height: height * 0.25,
-                          width: width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(),
-                          ),
-                          child: _imageFile == null
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image(
-                                      image: const AssetImage(
-                                          "assets/images/addpic.png"),
-                                      width: width * 0.15,
-                                    ),
-                                    SizedBox(
-                                      height: height * 0.02,
-                                    ),
-                                    const Text("Add image to your car!"),
-                                  ],
-                                )
-                              : Image(
-                                  image: FileImage(_imageFile!),
-                                  fit: BoxFit.cover,
-                                )),
-                    ),
-                    SizedBox(
-                      height:widget.isInEditPost ? height * 0.03:height * 0.1,
-                    ),
-                    Row(
+                    Column(
                       children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 6.0),
-                            child: InputButtomSheet(
-                              hint: "Mark",
-                              controller: _mark,
-                              validator: (value) {
-                                if (value!.length < 2) {
-                                  return "Insert Mark ?";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
+                        SizedBox(
+                          height: height * 0.05,
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
-                            child: InputButtomSheet(
-                              hint: "Price",
-                              controller: _price,
-                              validator: (value) {
-                                if (value!.length < 2) {
-                                  return "Insert Price ?";
-                                }
-                                return null;
-                              },
+                        HeaderSettings(
+                          padding: 0.0,
+                          width: width,
+                          text: widget.text ?? "Add Post",
+                          isEdit: widget.isEdit,
+                        ),
+                        SizedBox(
+                          height: height * 0.05,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _pickImage();
+                          },
+                          child: Container(
+                              height: height * 0.25,
+                              width: width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(),
+                              ),
+                              child: _imageFile == null
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image(
+                                          image: const AssetImage(
+                                              "assets/images/addImage.png"),
+                                          width: width * 0.15,
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.02,
+                                        ),
+                                        const Text("Add image to your car!"),
+                                      ],
+                                    )
+                                  : Image(
+                                      image: FileImage(_imageFile!),
+                                      fit: BoxFit.cover,
+                                    )),
+                        ),
+                        SizedBox(
+                          height: widget.isInEditPost
+                              ? height * 0.03
+                              : height * 0.1,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 6.0),
+                                child: InputButtomSheet(
+                                  hint: "Mark",
+                                  controller: _mark,
+                                  validator: (value) {
+                                    if (value!.length < 2) {
+                                      return "Insert Mark ?";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 6.0),
+                                child: InputButtomSheet(
+                                  hint: "Price",
+                                  controller: _price,
+                                  validator: (value) {
+                                    if (value!.length < 2) {
+                                      return "Insert Price ?";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        InputButtomSheet(
+                          hint: "Model",
+                          controller: _model,
+                          validator: (value) {
+                            if (value!.length < 2) {
+                              return "Insert Model ?";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        InputButtomSheet(
+                          hint: "Description",
+                          controller: _description,
+                          maxLine: 4,
+                          validator: (value) {
+                            if (value!.length < 2) {
+                              return "Insert  Description?";
+                            }
+                            return null;
+                          },
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
-                    InputButtomSheet(
-                      hint: "Model",
-                      controller: _model,
-                      validator: (value) {
-                        if (value!.length < 2) {
-                          return "Insert Model ?";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
-                    InputButtomSheet(
-                      hint: "Description",
-                      controller: _description,
-                      maxLine: 4,
-                      validator: (value) {
-                        if (value!.length < 2) {
-                          return "Insert  Description?";
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-                _isLoading
-                    ? Padding(
-                      padding:  EdgeInsets.only(bottom: height*0.01),
-                      child: CircularProgressIndicator(
-                          color: MainColor,
-                        ),
-                    )
-                    : Padding(
-                      padding:  EdgeInsets.only(bottom: height*0.01),
-                      child: ButtonCustom(
-                          clicked: () {
-                            if (_formKey.currentState!.validate()) {
-                              _addPost();
-                            }
-                          },
-                          text: widget.isInEditPost?"Edit":"Post",
-                          isPost: false,
-                        ),
-                    )
-              ]),
+                    _isLoading
+                        ? Padding(
+                            padding: EdgeInsets.only(bottom: height * 0.01),
+                            child: CircularProgressIndicator(
+                              color: MainColor,
+                            ),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(bottom: height * 0.01),
+                            child: ButtonCustom(
+                              clicked: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _addPost();
+                                }
+                              },
+                              text: widget.isInEditPost ? "Edit" : "Post",
+                              isPost: false,
+                            ),
+                          )
+                  ]),
             ),
           ),
         ),

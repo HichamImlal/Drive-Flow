@@ -3,22 +3,26 @@ import 'package:flutter/material.dart';
 
 class CustomDetails extends StatelessWidget {
   const CustomDetails({
-    super.key,
-    required this.width,
+    super.key, this.mark, this.model, this.price,
   });
 
-  final double width;
+  final mark;
+  final model;
+  final price;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
     return Container(
-      width: width * 0.75,
+      width: width * 0.7,
       decoration: BoxDecoration(
         color: Colors.grey[200], 
         borderRadius: BorderRadius.circular(10), 
       ),
-      child: const Column(
+      child:  Column(
         children: [
+          SizedBox(height: height*0.015,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -32,7 +36,7 @@ class CustomDetails extends StatelessWidget {
                   Text("Model :",
                       style:
                           TextStyle(fontSize: 16, fontFamily: "Poppins_med")),
-                  Text("Color :",
+                  Text("Price :",
                       style:
                           TextStyle(fontSize: 16, fontFamily: "Poppins_med")),
                 ],
@@ -40,13 +44,14 @@ class CustomDetails extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Dacia", style: TextStyle(fontSize: 16)),
-                  Text("G305", style: TextStyle(fontSize: 16)),
-                  Text("Blue", style: TextStyle(fontSize: 16)),
+                  Text(mark, style: TextStyle(fontSize: 16)),
+                  Text(model, style: TextStyle(fontSize: 16)),
+                  Text("${price} MAD", style: TextStyle(fontSize: 16)),
                 ],
               )
             ],
-          )
+          ),
+          SizedBox(height: height*0.015,),
         ],
       ),
     );

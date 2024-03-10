@@ -1,9 +1,7 @@
 import 'dart:typed_data';
-
-import 'package:drive_flow_ui/admin/Widgets/CustomDetails.dart';
 import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/constant.dart';
-import 'package:drive_flow_ui/user/Widgets/CustomButton.dart';
+import 'package:drive_flow_ui/user/Widgets/ButtomSheetCarDetails.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
@@ -16,12 +14,14 @@ class CustomCard extends StatefulWidget {
     this.price,
     this.description,
     required this.image,
+    this.imageData,
   });
   final mark;
   final model;
   final price;
   final description;
   final Uint8List image;
+  final Uint8List? imageData;
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
@@ -31,9 +31,12 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: () {
-      widget.isAdmin?(){}:_showDetailsDialog(context);
+        widget.isAdmin ? () {} :
+        showModalBottomSheet(
+            context: context, builder: (context) => ButtomSheetCarDetails(height: height, widget: widget));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -115,16 +118,18 @@ class _CustomCardState extends State<CustomCard> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 19),
               child: Container(
-                height: height*0.2,
-                child: Image.memory(widget.image)),
+                  height: height * 0.2, child: Image.memory(widget.image)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 19),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 15,
-                    backgroundImage: AssetImage('assets/images/person.jpg'),
+                    backgroundImage: widget.imageData == null
+                        ? AssetImage("assets/images/addpic.png")
+                            as ImageProvider<Object>
+                        : MemoryImage(widget.imageData!),
                   ),
                   const SizedBox(
                     width: 10,
@@ -153,166 +158,11 @@ class _CustomCardState extends State<CustomCard> {
     );
   }
 
-  bool _isfavorite = true;
-
-  void _showDetailsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        final width = MediaQuery.of(context).size.width;
-        final height = MediaQuery.of(context).size.height;
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return Container(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.035),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: height * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Image(
-                            image: const AssetImage("assets/images/arrow.png"),
-                            width: width * 0.06,
-                          ),
-                        ),
-                        const Text(
-                          'Cars details',
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        IconButton(
-                          icon: _isfavorite
-                              ? const Icon(
-                                  Icons.favorite_border,
-                                  size: 28,
-                                )
-                              : const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                  size: 28,
-                                ),
-                          onPressed: () {
-                            setState(() {
-                              _isfavorite = !_isfavorite;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: height * 0.03,
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("assets/images/logocar.jpg"),
-                                radius: 40,
-                              ),
-                              SizedBox(
-                                width: width * 0.04,
-                              ),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Sport car",
-                                    style: TextStyle(
-                                        fontSize: 22, color: Colors.black54),
-                                  ),
-                                  Text(
-                                    "Agadir , Morocco",
-                                    style: TextStyle(
-                                        fontSize: 16, color: Colors.black45),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          Container(
-                            height: 0.8,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            height: height * 0.03,
-                          ),
-                          Container(
-                            child: const Image(
-                              image: AssetImage("assets/images/carimage1.png"),
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.05,
-                          ),
-                          CustomDetails(width: width),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
-                    const Text(
-                      "specification :",
-                      style: TextStyle(fontFamily: "Poppins_med"),
-                    ),
-                    const Text(
-                      'A sleek, midnight blue sedan with aerodynamic curves, boasting a powerful hybrid engine and advanced safety features for a smooth .',
-                    ),
-                    SizedBox(
-                      height: height * 0.065,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Price : ",
-                              style: TextStyle(
-                                  fontSize: 18, fontFamily: "Poppins_med"),
-                            ),
-                            Text(
-                              "500 MAD",
-                              style: TextStyle(fontSize: 22, color: MainColor),
-                            ),
-                          ],
-                        ),
-                        ButtonCustom(
-                          clicked: () {},
-                          text: "Rent Car",
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
 
   void _showEditDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final width = MediaQuery.of(context).size.width;
-        final height = MediaQuery.of(context).size.height;
         return StatefulBuilder(
           builder: (context, setState) {
             return const AddPostAdmin(
@@ -326,3 +176,4 @@ class _CustomCardState extends State<CustomCard> {
     );
   }
 }
+

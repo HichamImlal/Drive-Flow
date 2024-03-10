@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:typed_data';
 import 'package:drive_flow_ui/class/Car.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/CustomCard.dart';
@@ -18,12 +18,28 @@ class CustomListView extends StatefulWidget {
 }
 
 class _CustomListViewState extends State<CustomListView> {
-  List<Car> posts = [];
+   Uint8List? imageData;
+
   @override
   void initState() {
     super.initState();
-   widget.isAdmin?fetchPosts():fetchPostsUsers();
+    _getImage();
+    widget.isAdmin?fetchPosts():fetchPostsUsers();
   }
+
+  Future<void> _getImage() async {
+    final userData =
+        Provider.of<UserDataProvider>(context, listen: false)?.userData;
+    final url = 'http://${ipAddress}:8080/getImage/${userData!['id']}';
+
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setState(() {
+        imageData = response.bodyBytes;
+      });
+    }
+  }
+  List<Car> posts = [];
   void fetchPostsUsers() async {
     final url = Uri.parse('http://${ipAddress}:8080/getAllPosts');
     final response = await http.get(url);
@@ -70,6 +86,7 @@ class _CustomListViewState extends State<CustomListView> {
                   price: posts[index].price,
                   description: posts[index].description,
                   image: posts[index].image,
+                  imageData: imageData,
                 ),
               )),
     );

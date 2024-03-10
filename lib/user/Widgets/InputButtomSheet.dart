@@ -1,7 +1,7 @@
 import 'package:drive_flow_ui/constant.dart';
 import 'package:flutter/material.dart';
 
-class InputButtomSheet extends StatelessWidget {
+class InputButtomSheet extends StatefulWidget {
   const InputButtomSheet(
       {super.key,
       this.hint,
@@ -13,16 +13,29 @@ class InputButtomSheet extends StatelessWidget {
   final maxLine;
   final IconData? icon;
   final String? Function(String?)? validator;
+
   final controller;
+
+  @override
+  State<InputButtomSheet> createState() => _InputButtomSheetState();
+}
+
+class _InputButtomSheetState extends State<InputButtomSheet> {
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      validator: validator,
-      maxLines: maxLine,
+      controller: widget.hint == "Date"
+          ? _dateController
+          : widget.hint == "Time"
+              ? _timeController
+              : widget.controller,
+      validator: widget.validator,
+      maxLines: widget.maxLine,
       decoration: InputDecoration(
-        hintText: hint,
-        prefixIcon: icon != null ? Icon(icon) : null,
+        hintText: widget.hint,
+        prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -32,6 +45,40 @@ class InputButtomSheet extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
+      readOnly: widget.hint == "Date" || widget.hint == "Time" ? true : false,
+      onTap: () {
+        if (widget.hint == "Date") {
+          _selectDate();
+        } else if (widget.hint == "Time") {
+          _selectTime();
+        }
+      },
     );
+  }
+
+  Future<void> _selectDate() async {
+    DateTime? _picker = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2100));
+    if (_picker != null) {
+      setState(() {
+        _dateController.text = _picker.toString().split(" ")[0];
+      });
+    }
+  }
+
+  Future<void> _selectTime() async {
+    TimeOfDay? timeOfDay = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (timeOfDay != null) {
+      setState(() {
+        _timeController.text = "${timeOfDay.hour}:${timeOfDay.minute}";
+      });
+    }
   }
 }
