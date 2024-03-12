@@ -7,12 +7,14 @@ class Car {
   String model;
   String description;
   int id_admin;
+  int id_car;
   Uint8List image;
 
-  Car(this.mark, this.price, this.model, this.description, this.image,this.id_admin);
+  Car(this.mark, this.price, this.model, this.description, this.image,this.id_admin,this.id_car);
 
   Car.fromJson(Map<String, dynamic> json)
-    : mark = json['mark'] as String? ?? '',
+    : id_car = json['id'] as int? ?? 0,
+      mark = json['mark'] as String? ?? '',
       price = (json['price'] as num?)?.toDouble() ?? 0.0,
       model = json['model'] as String? ?? '',
       description = json['description'] as String? ?? '',

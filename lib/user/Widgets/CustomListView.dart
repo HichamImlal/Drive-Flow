@@ -81,6 +81,7 @@ class _CustomListViewState extends State<CustomListView> {
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: CustomCard(
                   isAdmin: widget.isAdmin,
+                  id_car: posts[index].id_car,
                   mark: posts[index].mark,
                   model: posts[index].model,
                   price: posts[index].price,

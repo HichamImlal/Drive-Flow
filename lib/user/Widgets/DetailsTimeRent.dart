@@ -2,7 +2,12 @@ import 'package:drive_flow_ui/user/Widgets/InputButtomSheet.dart';
 import 'package:flutter/material.dart';
 
 class DetailsTimeRent extends StatelessWidget {
-  const DetailsTimeRent({super.key});
+  const DetailsTimeRent({super.key, this.dateStartController, this.timeStartController, this.dateEndController, this.timeendController});
+     final dateStartController;
+     final dateEndController;
+  final timeStartController ;
+  final timeendController ;
+  
   
   @override
   Widget build(BuildContext context) {
@@ -27,14 +32,14 @@ class DetailsTimeRent extends StatelessWidget {
             SizedBox(
               height: height * 0.01,
             ),
-            const Row(
+             Row(
               children: [
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
                         right: 6.0),
                     child: InputButtomSheet(
-                        hint: "Date", icon: Icons.calendar_month),
+                        hint: "Date", icon: Icons.calendar_month,dateController:dateStartController,),
                   ),
                 ),
                 Expanded(
@@ -42,7 +47,7 @@ class DetailsTimeRent extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: 6.0), 
                     child: InputButtomSheet(
-                        hint: "Time", icon: Icons.access_time),
+                        hint: "Time", icon: Icons.access_time,timeController:timeStartController ,),
                   ),
                 ),
               ],
@@ -63,14 +68,14 @@ class DetailsTimeRent extends StatelessWidget {
             SizedBox(
               height: height * 0.01,
             ),
-            const Row(
+             Row(
               children: [
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
                         right: 6.0),
                     child: InputButtomSheet(
-                        hint: "Date", icon: Icons.calendar_month),
+                        hint: "Date", icon: Icons.calendar_month,dateController: dateEndController,),
                   ),
                 ),
                 Expanded(
@@ -78,7 +83,7 @@ class DetailsTimeRent extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: 6.0),
                     child: InputButtomSheet(
-                        hint: "Time", icon: Icons.access_time),
+                        hint: "Time", icon: Icons.access_time,timeController: timeendController,),
                   ),
                 ),
               ],

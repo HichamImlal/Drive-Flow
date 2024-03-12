@@ -90,11 +90,6 @@ class ButtomSheetCarDetails extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Price : ",
-                        style:
-                            TextStyle(fontSize: 18, fontFamily: "Poppins_med"),
-                      ),
                       Text(
                         "${widget.price} MAD",
                         style: TextStyle(fontSize: 20, color: MainColor),
@@ -109,6 +104,7 @@ class ButtomSheetCarDetails extends StatelessWidget {
                           mark: widget.mark,
                           model: widget.model,
                           price: widget.price,
+                          id_car: widget.id_car,
                         ),
                       ));
                     },

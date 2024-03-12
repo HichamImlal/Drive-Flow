@@ -1,3 +1,4 @@
+import 'package:drive_flow_ui/admin/screens/CustomRentCarsScreen.dart';
 import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/admin/screens/DashboardAdmin.dart';
 import 'package:drive_flow_ui/admin/screens/HomeScreenAdmin.dart';
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
           'HomeScreenAdmin':(context) =>const HomeScreenAdmin(),
           'AddPostAdmin':(context) =>const AddPostAdmin(),
           'EditProfilScreen':(context) => const EditProfilScreen(),
+          'CustomRentCars':(context) => const CustomRentCars(),
         },
         home: const SplashScreen(),
       ),

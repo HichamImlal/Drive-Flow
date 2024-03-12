@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:drive_flow_ui/admin/Widgets/CustomDetails.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/DetailsTimeRent.dart';
 import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class RentCarDetails extends StatefulWidget {
   const RentCarDetails({
@@ -12,13 +16,14 @@ class RentCarDetails extends StatefulWidget {
     required this.image,
     this.mark,
     this.model,
-    this.price,
+    this.price, this.id_car,
   });
 
   final Uint8List image;
   final mark;
   final model;
   final price;
+  final id_car;
 
   @override
   State<RentCarDetails> createState() => _RentCarDetailsState();
@@ -28,11 +33,61 @@ int nb_days = 1;
 double total = 0;
 
 class _RentCarDetailsState extends State<RentCarDetails> {
+  late TextEditingController start_date_timeController;
+  late TextEditingController start_date_Controller;
+  late TextEditingController end_date_timeController;
+  late TextEditingController end_date_Controller;
+  int nb_days = 1;
+  double total = 0;
+
+   @override
+  void initState() {
+    super.initState();
+    start_date_Controller = TextEditingController();
+    start_date_timeController= TextEditingController();
+    end_date_timeController= TextEditingController();
+    end_date_Controller = TextEditingController();
+    updateTotal();
+  }
+  Future<void> addRental(String dateIn,String dateOut,double total) async {
+  final String apiUrl = "http://${ipAddress}:8080/rentals/addRental";
+  final userData =
+        Provider.of<UserDataProvider>(context, listen: false)?.userData;
+  print(userData!['id']);
+  Map<String, dynamic> requestBody = {
+    "userId": userData!['id'],
+    "carId":widget.id_car,
+    "dateIn": dateIn,
+    "dateOut": dateOut,
+    "rentalPrice": total
+  };
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(requestBody),
+    );
+
+    if (response.statusCode == 201) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Rental added successfully.'),
+        duration: Duration(seconds: 3),
+      ));
+      print('Rental added successfully.');
+    } else {
+      print('Failed to add rental: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Exception occurred while adding rental: $error');
+  }
+}
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
-    updateTotal();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -62,7 +117,12 @@ class _RentCarDetailsState extends State<RentCarDetails> {
                   model: widget.model,
                   price: widget.price,
                 ),
-                DetailsTimeRent(),
+                DetailsTimeRent(
+                  dateStartController: start_date_Controller,
+                  dateEndController: end_date_Controller,
+                  timeStartController: start_date_timeController,
+                  timeendController: end_date_timeController,
+                ),
                 SizedBox(
                   height: height * 0.04,
                 ),
@@ -104,8 +164,8 @@ class _RentCarDetailsState extends State<RentCarDetails> {
                         ),
                         Text(
                           "${nb_days}",
-                          style:
-                              TextStyle(fontFamily: 'Poppins_med', fontSize: 25),
+                          style: TextStyle(
+                              fontFamily: 'Poppins_med', fontSize: 25),
                         ),
                         SizedBox(
                           width: width * 0.05,
@@ -135,7 +195,9 @@ class _RentCarDetailsState extends State<RentCarDetails> {
                 ),
               ],
             ),
-            SizedBox(height: height*0.08,),
+            SizedBox(
+              height: height * 0.08,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
@@ -148,8 +210,9 @@ class _RentCarDetailsState extends State<RentCarDetails> {
                           Text(
                             "Total :",
                             style: TextStyle(
-                                fontFamily: "Poppins_med",
-                                fontSize: 22,),
+                              fontFamily: "Poppins_med",
+                              fontSize: 22,
+                            ),
                           ),
                           SizedBox(
                             width: width * 0.03,
@@ -163,21 +226,25 @@ class _RentCarDetailsState extends State<RentCarDetails> {
                           ),
                         ],
                       ),
-                      Container(
-                        width: width * 0.3,
-                        height: height * 0.06,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: MainColor
+                      GestureDetector(
+                        onTap: () {
+                          checkAndCallFunction(start_date_Controller.text,end_date_Controller.text);
+                        },
+                        child: Container(
+                          width: width * 0.3,
+                          height: height * 0.06,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: MainColor),
+                          child: Center(
+                              child: Text(
+                            "Rent",
+                            style: TextStyle(
+                                fontFamily: "Poppins_med",
+                                fontSize: 18,
+                                color: Colors.white),
+                          )),
                         ),
-                        child: Center(
-                            child: Text(
-                          "Rent",
-                          style: TextStyle(
-                              fontFamily: "Poppins_med",
-                              fontSize: 18,
-                              color: Colors.white),
-                        )),
                       )
                     ],
                   )
@@ -189,9 +256,37 @@ class _RentCarDetailsState extends State<RentCarDetails> {
       ),
     );
   }
+
   void updateTotal() {
-  setState(() {
-    total = widget.price * nb_days;
-  });
+    setState(() {
+      total = widget.price * nb_days;
+    });
+  }
+  void checkAndCallFunction(String startDateString, String endDateString) {
+  DateTime startDate = DateTime.parse(startDateString);
+  DateTime endDate = DateTime.parse(endDateString);
+  Duration difference = endDate.difference(startDate);
+  if (difference.inDays >= 1) {
+    addRental(startDateString, endDateString,total);
+  } else {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("The difference between start and end dates must be exactly one day."),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
+
 }

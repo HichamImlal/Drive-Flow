@@ -8,28 +8,28 @@ class InputButtomSheet extends StatefulWidget {
       this.icon,
       this.maxLine,
       this.controller,
-      this.validator});
+      this.validator,this.dateController, this.timeController});
   final hint;
   final maxLine;
   final IconData? icon;
   final String? Function(String?)? validator;
 
   final controller;
+   final dateController;
+  final timeController ;
 
   @override
   State<InputButtomSheet> createState() => _InputButtomSheetState();
 }
 
 class _InputButtomSheetState extends State<InputButtomSheet> {
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _timeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.hint == "Date"
-          ? _dateController
+          ? widget.dateController
           : widget.hint == "Time"
-              ? _timeController
+              ? widget.timeController
               : widget.controller,
       validator: widget.validator,
       maxLines: widget.maxLine,
@@ -64,7 +64,7 @@ class _InputButtomSheetState extends State<InputButtomSheet> {
         lastDate: DateTime(2100));
     if (_picker != null) {
       setState(() {
-        _dateController.text = _picker.toString().split(" ")[0];
+       widget.dateController.text = _picker.toString().split(" ")[0];
       });
     }
   }
@@ -77,7 +77,7 @@ class _InputButtomSheetState extends State<InputButtomSheet> {
     );
     if (timeOfDay != null) {
       setState(() {
-        _timeController.text = "${timeOfDay.hour}:${timeOfDay.minute}";
+       widget.timeController.text = "${timeOfDay.hour}:${timeOfDay.minute}";
       });
     }
   }

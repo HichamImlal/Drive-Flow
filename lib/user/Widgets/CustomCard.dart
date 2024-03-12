@@ -14,11 +14,12 @@ class CustomCard extends StatefulWidget {
     this.price,
     this.description,
     required this.image,
-    this.imageData,
+    this.imageData, this.id_car,
   });
   final mark;
   final model;
   final price;
+  final id_car;
   final description;
   final Uint8List image;
   final Uint8List? imageData;

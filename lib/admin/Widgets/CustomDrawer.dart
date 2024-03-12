@@ -46,8 +46,11 @@ class CustomDrawer extends StatelessWidget {
           ),
           CustomMenu(
             width: width,
-            pathImage: "assets/images/bookmark.png",
-            text: "Bookings",
+            pathImage: "assets/images/car-rental.png",
+            text: "My Rentals",
+            clicked: (){
+              Navigator.pushNamed(context, 'CustomRentCars');
+            },
           ),
           CustomMenu(
             width: width,
