@@ -19,6 +19,7 @@ class CustomListView extends StatefulWidget {
 
 class _CustomListViewState extends State<CustomListView> {
    Uint8List? imageData;
+   int ? idAdmin;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _CustomListViewState extends State<CustomListView> {
     final userData =
         Provider.of<UserDataProvider>(context, listen: false)?.userData;
     final url = 'http://${ipAddress}:8080/getImage/${userData!['id']}';
-
+    idAdmin=userData!['id'];
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       setState(() {
@@ -69,7 +70,6 @@ class _CustomListViewState extends State<CustomListView> {
       throw Exception('Failed to load posts');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(

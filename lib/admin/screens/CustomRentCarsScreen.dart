@@ -4,8 +4,10 @@ import 'package:drive_flow_ui/admin/Widgets/CustomRentalCars.dart';
 import 'package:drive_flow_ui/class/RentalDetailsDTO.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
+import 'package:drive_flow_ui/user/providers/UserDataProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class CustomRentCars extends StatefulWidget {
   const CustomRentCars({super.key});
@@ -15,38 +17,33 @@ class CustomRentCars extends StatefulWidget {
 }
 
 class _CustomRentCarsState extends State<CustomRentCars> {
-  @override
-  void initState() {
-  super.initState();
-  loadData();
-}
 
   List<RentalDetailsDTO> rentalDetails = [];
 
-  Future<List<RentalDetailsDTO>> fetchRentalDetails() async {
-  final response = await http.get(Uri.parse('http://${ipAddress}:8080/rentals/details'));
-
-  if (response.statusCode == 200) {
-    List<dynamic> data = jsonDecode(response.body);
-    List<RentalDetailsDTO> rentalDetailsList = [];
-    for (var item in data) {
-      rentalDetailsList.add(RentalDetailsDTO.fromJson(item));
+ @override
+  void initState() {
+    super.initState();
+    getAllRentalDetails();
+  }
+  Future<void> getAllRentalDetails() async {
+    try {
+      final userData =
+        Provider.of<UserDataProvider>(context, listen: false).userData;
+      final response = await http.get(Uri.parse('http://${ipAddress}:8080/rentals/details?adminId=${userData!['id'].toString()}'));
+      if (response.statusCode == 200) {
+        List<dynamic> jsonResponse = json.decode(response.body);
+        List<RentalDetailsDTO> rentalDetailsList = jsonResponse.map((item) => RentalDetailsDTO.fromJson(item)).toList();
+        setState(() {
+          rentalDetails = rentalDetailsList;
+        });
+      } else {
+        print('Failed to load rental details. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching rental details: $e');
     }
-    return rentalDetailsList;
-  } else {
-    throw Exception('Failed to load rental details');
   }
-}
-void loadData() async {
-  try {
-    List<RentalDetailsDTO> fetchedDetails = await fetchRentalDetails();
-    setState(() {
-      rentalDetails = fetchedDetails;
-    });
-  } catch (e) {
-    print('Error: $e');
-  }
-}
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
@@ -74,7 +71,6 @@ void loadData() async {
                   child: CustomRentalCars(width: width, height: height,rentalDetails: rentalDetails[index],),
                 )),
           ),
-          
         ],
       ),
     );

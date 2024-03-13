@@ -16,7 +16,7 @@ class RentCarDetails extends StatefulWidget {
     required this.image,
     this.mark,
     this.model,
-    this.price, this.id_car,
+    this.price, this.id_car, this.id_admin,
   });
 
   final Uint8List image;
@@ -24,6 +24,7 @@ class RentCarDetails extends StatefulWidget {
   final model;
   final price;
   final id_car;
+  final id_admin;
 
   @override
   State<RentCarDetails> createState() => _RentCarDetailsState();
@@ -53,10 +54,10 @@ class _RentCarDetailsState extends State<RentCarDetails> {
   final String apiUrl = "http://${ipAddress}:8080/rentals/addRental";
   final userData =
         Provider.of<UserDataProvider>(context, listen: false)?.userData;
-  print(userData!['id']);
   Map<String, dynamic> requestBody = {
     "userId": userData!['id'],
     "carId":widget.id_car,
+    "adminId":widget.id_admin,
     "dateIn": dateIn,
     "dateOut": dateOut,
     "rentalPrice": total
@@ -77,11 +78,31 @@ class _RentCarDetailsState extends State<RentCarDetails> {
         duration: Duration(seconds: 3),
       ));
       print('Rental added successfully.');
+      print(widget.id_car);
+      updateCarAvailability(widget.id_car);
     } else {
       print('Failed to add rental: ${response.statusCode}');
     }
   } catch (error) {
     print('Exception occurred while adding rental: $error');
+  }
+}
+Future<void> updateCarAvailability(int carId) async {
+  final String apiUrl = "http://${ipAddress}:8080/cars/updateAvailability?carId=$carId";
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      print('Car availability updated successfully.');
+    } else {
+      print('Failed to update car availability: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Exception occurred while updating car availability: $error');
   }
 }
   @override

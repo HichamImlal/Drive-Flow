@@ -31,13 +31,14 @@ class _CustomRentalCarsState extends State<CustomRentalCars> {
     double totalPrice = widget.rentalDetails.totalPrice;
     String dateIn = widget.rentalDetails.dateIn;
     String dateOut = widget.rentalDetails.dateOut;
+    String dateTimeStringOut = dateOut;
     String dateTimeString = dateIn;
     DateTime dateTime = DateTime.parse(dateTimeString);
     String _dateIn =
         "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
-        DateTime _dateTime = DateTime.parse(dateTimeString);
-    String _dateOut =
-        "${dateTime.year}-${_dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+        DateTime dateTimeOut = DateTime.parse(dateTimeStringOut);
+        String _dateOut =
+        "${dateTime.year}-${dateTimeOut.month.toString().padLeft(2, '0')}-${dateTimeOut.day.toString().padLeft(2, '0')}";
     Uint8List? imageBytes = base64Decode(widget.rentalDetails.image);
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -68,7 +69,8 @@ class _CustomRentalCarsState extends State<CustomRentalCars> {
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(10)),
-                    height: widget.height * 0.13,
+                    width: widget.width * 0.45,
+                    height: widget.height*0.13,
                     child: Image(
                       image: MemoryImage(imageBytes!),
                     ),

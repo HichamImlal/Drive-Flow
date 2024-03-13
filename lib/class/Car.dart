@@ -18,6 +18,6 @@ class Car {
       price = (json['price'] as num?)?.toDouble() ?? 0.0,
       model = json['model'] as String? ?? '',
       description = json['description'] as String? ?? '',
-      id_admin = (json['id_admin'] as int?) ?? 0,
+      id_admin = json['id_admin'] as int? ?? 0,
       image = (json['image'] != null) ? base64Decode(json['image'] as String) : Uint8List(0);
 }
