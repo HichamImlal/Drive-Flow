@@ -126,7 +126,6 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                           padding: 0.0,
                           width: width,
                           text: widget.text ?? "Add Post",
-                          isEdit: widget.isEdit,
                         ),
                         SizedBox(
                           height: height * 0.05,

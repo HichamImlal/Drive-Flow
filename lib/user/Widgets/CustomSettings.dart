@@ -19,13 +19,10 @@ class CustomSettings extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (text == "Edit profile") {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const EditProfilScreen(),
-            ));
+            Navigator.pushNamed(context, 'EditProfilScreen');
+            
           } else if (text == "Security") {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const SecurityScreen(),
-            ));
+            Navigator.pushNamed(context, 'SecurityScreen');
           } else if (text == "Log out") {
             _showLogoutDialog(context);
           }

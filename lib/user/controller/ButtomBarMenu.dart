@@ -1,5 +1,4 @@
-// ignore: file_names
-import "package:drive_flow_ui/user/screens/NotificationScreen.dart";
+import "package:drive_flow_ui/user/screens/HistoryScreen.dart";
 import "package:drive_flow_ui/user/screens/SettingsScreen.dart";
 import "package:flutter/material.dart";
 import "package:google_nav_bar/google_nav_bar.dart";
@@ -13,13 +12,11 @@ class SearshScreen extends StatefulWidget {
   State<SearshScreen> createState() => _SearshScreenState();
 }
 class _SearshScreenState extends State<SearshScreen> {
-  List<Widget> body = [const HomeScreen(),const MapsScreen(), const NotificationScreen(),const SettingsScreen()];
+  List<Widget> body = [const HomeScreen(),const MapsScreen(), const HistoryScreen(),const SettingsScreen()];
   int index_=1;
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             border: Border(
@@ -44,14 +41,13 @@ class _SearshScreenState extends State<SearshScreen> {
             style: GnavStyle.oldSchool, 
             tabs:const  [
               GButton(icon: Icons.home,text: 'Home',),
-              GButton(icon: Icons.search,text: 'Search',),
-              GButton(icon: Icons.notifications,text: 'Notifications',),
+              GButton(icon: Icons.map_outlined,text: 'Maps',),
+              GButton(icon: Icons.history,text: 'History',),
               GButton(icon: Icons.settings,text: 'settings',),
             ],
           ),
         ),
         body: Center(child: body[index_],),
-      ),
     );
   }
 }

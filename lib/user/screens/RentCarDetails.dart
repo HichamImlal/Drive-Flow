@@ -105,6 +105,37 @@ Future<void> updateCarAvailability(int carId) async {
     print('Exception occurred while updating car availability: $error');
   }
 }
+Future<void> addHistory(String dateIn,String dateOut,double total) async {
+  String url = 'http://${ipAddress}:8080/history/add';
+  final userData =
+        Provider.of<UserDataProvider>(context, listen: false)?.userData;
+  Map<String, dynamic> historyData = {
+    'mark': widget.mark,
+    'model': widget.model,
+    'userId': userData!['id'],
+    'dateIn': dateIn,
+    'dateOut': dateOut,
+    'carId': widget.id_car,
+    'total':total,
+  };
+  try {
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(historyData),
+    );
+    if (response.statusCode == 200) {
+      print('History added successfully');
+    } else {
+      print('Failed to add history: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
@@ -119,7 +150,6 @@ Future<void> updateCarAvailability(int carId) async {
                   height: height * 0.05,
                 ),
                 HeaderSettings(
-                  isEdit: false,
                   width: width,
                   text: "Rent Details",
                 ),
@@ -289,6 +319,8 @@ Future<void> updateCarAvailability(int carId) async {
   Duration difference = endDate.difference(startDate);
   if (difference.inDays >= 1) {
     addRental(startDateString, endDateString,total);
+    addHistory(startDateString, endDateString,total);
+    Navigator.pushNamed(context, 'SearshScreen');
   } else {
     showDialog(
       context: context,

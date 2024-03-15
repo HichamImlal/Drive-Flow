@@ -19,7 +19,6 @@ class CustomListView extends StatefulWidget {
 
 class _CustomListViewState extends State<CustomListView> {
    Uint8List? imageData;
-   int ? idAdmin;
 
   @override
   void initState() {
@@ -29,10 +28,7 @@ class _CustomListViewState extends State<CustomListView> {
   }
 
   Future<void> _getImage() async {
-    final userData =
-        Provider.of<UserDataProvider>(context, listen: false)?.userData;
-    final url = 'http://${ipAddress}:8080/getImage/${userData!['id']}';
-    idAdmin=userData!['id'];
+    final url = 'http://${ipAddress}:8080/getImage/2';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       setState(() {

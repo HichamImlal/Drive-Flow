@@ -43,7 +43,6 @@ class _CustomRentCarsState extends State<CustomRentCars> {
       print('Error fetching rental details: $e');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
@@ -56,7 +55,6 @@ class _CustomRentCarsState extends State<CustomRentCars> {
           ),
           HeaderSettings(
             width: width,
-            isEdit: false,
             text: "My Rentals",
           ),
           SizedBox(

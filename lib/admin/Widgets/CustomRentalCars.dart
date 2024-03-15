@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:drive_flow_ui/class/RentalDetailsDTO.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class CustomRentalCars extends StatefulWidget {
   const CustomRentalCars({

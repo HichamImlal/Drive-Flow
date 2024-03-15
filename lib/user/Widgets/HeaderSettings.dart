@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 class HeaderSettings extends StatelessWidget {
   const HeaderSettings({
     super.key,
-    required this.width, this.text, this.padding, this.isEdit,
+    required this.width, this.text, this.padding,
   });
 
   final double width;
   final text;
-  final isEdit;
   final padding;
 
   @override
@@ -32,7 +31,9 @@ class HeaderSettings extends StatelessWidget {
             text,
             style: const TextStyle(fontSize: 25,fontFamily: "Poppins_med"),
           ),
-          isEdit? Image(image:const AssetImage("assets/images/trash.png"),width: width*0.07,):SizedBox(width: width * 0.06,),
+          Text(
+            " ",
+          ),
         ],
       ),
     );

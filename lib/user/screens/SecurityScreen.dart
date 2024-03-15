@@ -82,7 +82,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 height: height * 0.05,
               ),
               HeaderSettings(
-                isEdit: false,
                 width: width,
                 text: "Edit Password",
               ),
