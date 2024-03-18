@@ -37,7 +37,7 @@ class CustomSearchCars extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Search here',
+                'Rechercher ici',
                 style: TextStyle(fontSize: 16),
               ),
               Icon(Icons.search),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:drive_flow_ui/admin/Widgets/CustomDrawer.dart';
 import 'package:drive_flow_ui/admin/Widgets/CustomRentalCars.dart';
+import 'package:drive_flow_ui/admin/Widgets/Header.dart';
 import 'package:drive_flow_ui/class/RentalDetailsDTO.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
@@ -47,15 +49,18 @@ class _CustomRentCarsState extends State<CustomRentCars> {
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawer(height: height, width: width),
       body: Column(
         children: [
           SizedBox(
             height: height * 0.05,
           ),
-          HeaderSettings(
-            width: width,
-            text: "My Rentals",
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Header(width: width, scaffoldKey: _scaffoldKey,text: "Mes locations",),
           ),
           SizedBox(
             height: height * 0.02,

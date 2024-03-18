@@ -16,23 +16,23 @@ class SecondScreen extends StatelessWidget {
             width: width * 0.95,
           ),
           const Text(
-            'Choose your destination',
+            'Sélectionnez votre destination',
             style: TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 color: Color(0xff4489FE)),
           ),
           const SizedBox(height: 20,),
            SizedBox(
             width: width*0.85,
              child:const Text(
-              'Lorem ipsum dolor sit amet consectetur. Adipiscing gravida in lacus mollis dignissim aenean. Sagittis vulputate in nam porta. Tellus integer erat elementum senectus.',
+              'Avec l\'attrait de possibilités illimitées, vous invitant à entreprendre un voyage sur mesure selon vos désirs. Dans le domaine de la location de voitures.',
               style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 14,
                   color: Color(0xffAFB5BF)),textAlign: TextAlign.justify,
                      ),
            ),
-           SizedBox(height: hieght*0.03,),
+           SizedBox(height: hieght*0.0345,),
            GestureDetector(
             onTap: ()=>Navigator.pushNamed(context, 'LoginScreen'),
              child: Container(
@@ -44,7 +44,7 @@ class SecondScreen extends StatelessWidget {
               ),
               child: const Center(
                 child: Text(
-                  'Get Started',
+                  'Commencez',
                   style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Poppins',

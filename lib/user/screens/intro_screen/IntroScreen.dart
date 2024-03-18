@@ -43,7 +43,7 @@ class _IntroScrennState extends State<IntroScrenn> {
                           _controller.nextPage(duration: const  Duration(microseconds: 500), curve: Curves.easeIn);
                         },
                         child:  const Text(
-                         'Next',
+                         'Suivant',
                          style:  TextStyle(
                              fontSize: 18,
                              fontFamily: 'Poppins',

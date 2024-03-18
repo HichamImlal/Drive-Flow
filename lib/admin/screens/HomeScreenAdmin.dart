@@ -36,7 +36,7 @@ class HomeScreenAdmin extends StatelessWidget {
             SizedBox(
               height: height * 0.05,
             ),
-            Header(width: width, scaffoldKey: _scaffoldKey,text: "Home",),
+            Header(width: width, scaffoldKey: _scaffoldKey,text: "Accueil",),
             const Expanded(child: CustomListView(isAdmin: true,)),
           ],
         ),

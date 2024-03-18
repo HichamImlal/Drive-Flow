@@ -14,16 +14,16 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20,),
-            CustomText(text: 'Account'),
+            CustomText(text: 'Compte'),
             SizedBox(height: 10,),
             CustomBoxSettings(
               IconFirst: Icons.person,
-              textFirst: 'Edit profile',
+              textFirst: 'Modifier le profil',
               IconSecond: Icons.lock_rounded,
               textSecond: 'Security',
             ),
             SizedBox(height: 20,),
-            CustomText(text: 'Support & About'),
+            CustomText(text: 'Support & propos'),
             SizedBox(height: 10,),
             CustomBoxSettings(
               IconFirst: Icons.help_outline_outlined,
@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
               IconFirst: Icons.flag,
               textFirst: 'Report a  problem',
               IconSecond: Icons.logout,
-              textSecond: 'Log out',
+              textSecond: 'Déconnexion',
             ),
           ],
         ),

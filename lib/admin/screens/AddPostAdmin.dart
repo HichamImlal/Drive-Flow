@@ -11,11 +11,11 @@ import 'package:provider/provider.dart';
 
 class AddPostAdmin extends StatefulWidget {
   const AddPostAdmin(
-      {super.key, this.text, this.isInEditPost = false, this.isEdit = false});
+      {super.key, this.text, this.isInEditPost = false, this.isEdit = false, this.idCar});
   final text;
   final isInEditPost;
   final isEdit;
-
+  final idCar;
   @override
   State<AddPostAdmin> createState() => _AddPostAdminState();
 }
@@ -101,7 +101,42 @@ class _AddPostAdminState extends State<AddPostAdmin> {
       _isLoading = false;
     });
   }
-
+Future<void> _updatePost() async {
+    setState(() {
+      _isLoading = true;
+    });
+    final userData = Provider.of<UserDataProvider>(context, listen: false).userData;
+    final url = Uri.parse('http://${ipAddress}:8080/updatePost/${widget.idCar}');
+    var request = http.MultipartRequest('PUT', url);
+    request.fields['mark'] = _mark.text;
+    request.fields['price'] = _price.text;
+    request.fields['model'] = _model.text;
+    request.fields['id_admin'] = userData!["id"].toString();
+    request.fields['description'] = _description.text;
+    request.fields['available'] = 'true';
+    if (_imageFile != null) {
+      if (await _imageFile!.exists()) {
+        request.files.add(await http.MultipartFile.fromPath('image', _imageFile!.path));
+      } else {
+        print("Image file does not exist");
+      }
+    } else {
+      print("Image is null");
+    }
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Post updated successfully.'),
+        duration: Duration(seconds: 3),
+      ));
+      print('Post updated successfully');
+    } else {
+      print('Failed to update post');
+    }
+    setState(() {
+      _isLoading = false;
+    });
+}
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -123,9 +158,10 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                           height: height * 0.05,
                         ),
                         HeaderSettings(
+                          idCar: widget.idCar,
                           padding: 0.0,
                           width: width,
-                          text: widget.text ?? "Add Post",
+                          text: widget.text ?? "Ajouter une voiture",
                         ),
                         SizedBox(
                           height: height * 0.05,
@@ -154,7 +190,7 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                                         SizedBox(
                                           height: height * 0.02,
                                         ),
-                                        const Text("Add image to your car!"),
+                                        const Text("Ajouter une image à votre voiture !"),
                                       ],
                                     )
                                   : Image(
@@ -173,7 +209,7 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 6.0),
                                 child: InputButtomSheet(
-                                  hint: "Mark",
+                                  hint: "Marque",
                                   controller: _mark,
                                   validator: (value) {
                                     if (value!.length < 2) {
@@ -188,7 +224,7 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 6.0),
                                 child: InputButtomSheet(
-                                  hint: "Price",
+                                  hint: "Prix",
                                   controller: _price,
                                   validator: (value) {
                                     if (value!.length < 2) {
@@ -205,7 +241,7 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                           height: height * 0.02,
                         ),
                         InputButtomSheet(
-                          hint: "Model",
+                          hint: "Modèle",
                           controller: _model,
                           validator: (value) {
                             if (value!.length < 2) {
@@ -241,11 +277,13 @@ class _AddPostAdminState extends State<AddPostAdmin> {
                             padding: EdgeInsets.only(bottom: height * 0.01),
                             child: ButtonCustom(
                               clicked: () {
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState!.validate() && widget.isInEditPost==false) {
                                   _addPost();
+                                }else if(_formKey.currentState!.validate() && widget.isInEditPost==true){
+                                  _updatePost();
                                 }
                               },
-                              text: widget.isInEditPost ? "Edit" : "Post",
+                              text: widget.isInEditPost ? "Modifier" : "Publier",
                               isPost: false,
                             ),
                           )

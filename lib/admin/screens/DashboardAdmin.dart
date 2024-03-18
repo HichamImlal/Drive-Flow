@@ -72,7 +72,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
             child: Header(
               width: width,
               scaffoldKey: _scaffoldKey,
-              text: "Dashboard",
+              text: "Tableau de bord",
             ),
           ),
           SizedBox(
@@ -81,7 +81,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
           const Padding(
             padding:  EdgeInsets.symmetric(horizontal: 15),
             child:  Text(
-              "Available Cars :",
+              "Voitures disponibles :",
               style: TextStyle(fontSize: 16, fontFamily: "Poppins_semiBold"),
             ),
           ),
@@ -94,6 +94,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: CustomAvailableCars(
+                  id_car: posts[index].id_car,
                   mark: posts[index].mark,
                   model: posts[index].model,
                   price: posts[index].price,

@@ -37,11 +37,11 @@ class _CustomInputState extends State<CustomInput> {
           filled: true,
           fillColor: const Color.fromRGBO(224, 224, 224, 1),
           suffixIcon: IconButton(
-              icon: widget.hint == 'Password' ||
-                      widget.hint == 'Confirm Password' ||
-                      widget.hint == 'Old Password' ||
-                      widget.hint == 'New Password' ||
-                      widget.hint == 'Confirm New Password'
+              icon: widget.hint == 'Mot de passe' ||
+                      widget.hint == 'Confirmez le mot de passe' ||
+                      widget.hint == 'L\'ancien mot de passe' ||
+                      widget.hint == 'Nouveau mot de passe' ||
+                      widget.hint == 'Confirmer le nouveau mot de passe'
                   ?
                   // ignore: dead_code
                   ispasswordvisible
@@ -80,11 +80,11 @@ class _CustomInputState extends State<CustomInput> {
           ),
         ),
         obscureText: ispasswordvisible &&
-            (widget.hint == 'Password' ||
-                widget.hint == 'Confirm Password' ||
-                widget.hint == 'Old Password' ||
-                widget.hint == 'New Password' ||
-                widget.hint == 'Confirm New Password'),
+            (widget.hint == 'Mot de passe' ||
+                widget.hint == 'Confirmer le nouveau mot de passe' ||
+                widget.hint == 'L\'ancien mot de passe' ||
+                widget.hint == 'Nouveau mot de passe' ||
+                widget.hint == 'Confirmez le mot de passe'),
       ),
     );
   }

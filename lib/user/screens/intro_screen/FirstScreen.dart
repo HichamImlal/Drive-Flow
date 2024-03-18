@@ -13,9 +13,9 @@ class FirstScreen extends StatelessWidget {
           width: width * 0.95,
         ),
         const Text(
-          'Enjoy your trip',
+          'Profitez bien de votre voyage',
           style: TextStyle(
-              fontSize: 24,
+              fontSize: 20,
               color: Color(0xff4489FE)),
         ),
         const SizedBox(
@@ -24,7 +24,7 @@ class FirstScreen extends StatelessWidget {
         SizedBox(
           width: width * 0.85,
           child: const Text(
-            'Lorem ipsum dolor sit amet consectetur. Adipiscing gravida in lacus mollis dignissim aenean. Sagittis vulputate in nam porta. Tellus integer erat elementum senectus.',
+            "Cette phrase capture l'essence de l'aventure et de la détente, offrant de bons vœux pour un voyage mémorable à venir. Dans le contexte de la location de voitures.",
             style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,

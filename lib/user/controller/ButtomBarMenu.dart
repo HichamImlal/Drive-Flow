@@ -40,10 +40,10 @@ class _SearshScreenState extends State<SearshScreen> {
             textSize: 13,
             style: GnavStyle.oldSchool, 
             tabs:const  [
-              GButton(icon: Icons.home,text: 'Home',),
+              GButton(icon: Icons.home,text: 'Accueil',),
               GButton(icon: Icons.map_outlined,text: 'Maps',),
-              GButton(icon: Icons.history,text: 'History',),
-              GButton(icon: Icons.settings,text: 'settings',),
+              GButton(icon: Icons.history,text: 'Histoire',),
+              GButton(icon: Icons.settings,text: 'Paramètres',),
             ],
           ),
         ),

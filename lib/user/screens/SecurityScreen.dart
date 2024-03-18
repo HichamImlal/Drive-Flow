@@ -83,20 +83,20 @@ class _SecurityScreenState extends State<SecurityScreen> {
               ),
               HeaderSettings(
                 width: width,
-                text: "Edit Password",
+                text: "Mot de passe",
               ),
               SizedBox(
                 height: height * 0.05,
               ),
               TitleInput(
                 width: width,
-                text: "Old Password",
+                text: "L'ancien mot de passe",
               ),
               SizedBox(
                 height: height * 0.003,
               ),
               CustomInput(
-                hint: "Old Password",
+                hint: "L'ancien mot de passe",
                 controller: _oldPassword,
                 validator: (value) {
                   if (value == null || value.length < 9) {
@@ -110,13 +110,13 @@ class _SecurityScreenState extends State<SecurityScreen> {
               ),
               TitleInput(
                 width: width,
-                text: "New Password",
+                text: "Nouveau mot de passe",
               ),
               SizedBox(
                 height: height * 0.003,
               ),
               CustomInput(
-                hint: "New Password",
+                hint: "Nouveau mot de passe",
                 controller: _newPassword,
                 validator: (value) {
                   if (value != _confirmNewPassword.text ||
@@ -132,13 +132,13 @@ class _SecurityScreenState extends State<SecurityScreen> {
               ),
               TitleInput(
                 width: width,
-                text: "Confirm New Password",
+                text: "Confirmer le nouveau mot de passe",
               ),
               SizedBox(
                 height: height * 0.003,
               ),
               CustomInput(
-                hint: "Confirm New Password",
+                hint: "Confirmer le nouveau mot de passe",
                 controller: _confirmNewPassword,
                 validator: (value) {
                   if (value != _newPassword.text ||

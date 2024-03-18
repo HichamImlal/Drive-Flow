@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:drive_flow_ui/admin/screens/AddPostAdmin.dart';
 import 'package:drive_flow_ui/constant.dart';
 import 'package:drive_flow_ui/user/screens/RentCarDetails.dart';
 import 'package:flutter/material.dart';
@@ -34,17 +35,18 @@ class _CustomAvailableCarsState extends State<CustomAvailableCars> {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
     return GestureDetector(
-      onTap: () { 
-       widget.isAdmin?(){}:
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RentCarDetails(
-                  image: widget.image,
-                  price: widget.price,
-                  mark: widget.mark,
-                  model: widget.model,
-                  id_admin: widget.id_admin,
-                  id_car: widget.id_car,
-                )));
+      onTap: () {
+        widget.isAdmin
+            ? () {}
+            : Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => RentCarDetails(
+                      image: widget.image,
+                      price: widget.price,
+                      mark: widget.mark,
+                      model: widget.model,
+                      id_admin: widget.id_admin,
+                      id_car: widget.id_car,
+                    )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -73,7 +75,9 @@ class _CustomAvailableCarsState extends State<CustomAvailableCars> {
               trailing: widget.isAdmin
                   ? IconButton(
                       icon: const Icon(Icons.edit),
-                      onPressed: () {},
+                      onPressed: () {
+                        _showEditDialog(context);
+                      },
                     )
                   : Text(''),
             ),
@@ -110,6 +114,24 @@ class _CustomAvailableCarsState extends State<CustomAvailableCars> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showEditDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AddPostAdmin(
+              isInEditPost: true,
+              text: "Modifier la voiture",
+              isEdit: true,
+              idCar: widget.id_car,
+            );
+          },
+        );
+      },
     );
   }
 }

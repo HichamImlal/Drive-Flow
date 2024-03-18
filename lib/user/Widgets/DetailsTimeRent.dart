@@ -23,7 +23,7 @@ class DetailsTimeRent extends StatelessWidget {
               height: height * 0.03,
             ),
             const Text(
-              'pick-up',
+              'Prise',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -59,7 +59,7 @@ class DetailsTimeRent extends StatelessWidget {
               height: height * 0.01,
             ),
             const Text(
-              'Drop-of',
+              'Retour',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(

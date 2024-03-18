@@ -14,8 +14,8 @@ import 'package:drive_flow_ui/user/Widgets/HeaderSettings.dart';
 import 'package:drive_flow_ui/user/Widgets/TitleInput.dart';
 
 class EditProfilScreen extends StatefulWidget {
-  const EditProfilScreen({Key? key}) : super(key: key);
-
+  const EditProfilScreen({Key? key, this.isAdmin=true}) : super(key: key);
+  final isAdmin;
   @override
   State<EditProfilScreen> createState() => _EditProfilScreenState();
 }
@@ -23,6 +23,7 @@ class EditProfilScreen extends StatefulWidget {
 class _EditProfilScreenState extends State<EditProfilScreen> {
   late TextEditingController _username;
   final _formKey = GlobalKey<FormState>();
+  
 
  Uint8List? _decodeImage(String? base64String) {
   if (base64String == null || base64String.isEmpty) return null;
@@ -138,7 +139,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
               SizedBox(
                 height: height * 0.05,
               ),
-              HeaderSettings(width: width, text: "Edit Profile"),
+              HeaderSettings(width: width, text: "Modifier le profil"),
               SizedBox(
                 height: height * 0.1,
               ),
@@ -215,7 +216,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
               ),
               TitleInput(
                 width: width,
-                text: "Username",
+                text:widget.isAdmin?"Nom d'Agence" :"Nom d'utilisateur",
               ),
               SizedBox(
                 height: height * 0.003,
@@ -224,7 +225,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                 controller: _username,
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 8) {
-                    return 'Username must be between 0 and 9 characters ?';
+                    return "Le nom d\'utilisateur doit contenir entre 0 et 9 caractères ?";
                   }
                   return null;
                 },
@@ -248,7 +249,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
               ),
               Center(
                 child: ButtonCustom(
-                  text: "Save",
+                  text: "Enregistrer",
                   clicked: () {
                     if (_formKey.currentState!.validate()) {
                       updateUser();

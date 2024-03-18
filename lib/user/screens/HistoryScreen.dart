@@ -60,7 +60,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           Padding(
             padding: EdgeInsets.only(left: width * 0.04),
             child: Text(
-              "History Cars :",
+              "Histoire des voitures :",
               style: TextStyle(fontSize: 18, fontFamily: "Poppins_semiBold"),
             ),
           ),

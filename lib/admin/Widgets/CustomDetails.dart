@@ -30,13 +30,13 @@ class CustomDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Mark :",
+                    "Marque :",
                     style: TextStyle(fontSize: 16, fontFamily: "Poppins_med"),
                   ),
-                  Text("Model :",
+                  Text("Modèle :",
                       style:
                           TextStyle(fontSize: 16, fontFamily: "Poppins_med")),
-                  Text("Price :",
+                  Text("Prix :",
                       style:
                           TextStyle(fontSize: 16, fontFamily: "Poppins_med")),
                 ],

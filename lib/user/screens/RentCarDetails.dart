@@ -73,12 +73,7 @@ class _RentCarDetailsState extends State<RentCarDetails> {
     );
 
     if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Rental added successfully.'),
-        duration: Duration(seconds: 3),
-      ));
       print('Rental added successfully.');
-      print(widget.id_car);
       updateCarAvailability(widget.id_car);
     } else {
       print('Failed to add rental: ${response.statusCode}');
@@ -151,7 +146,7 @@ Future<void> addHistory(String dateIn,String dateOut,double total) async {
                 ),
                 HeaderSettings(
                   width: width,
-                  text: "Rent Details",
+                  text: "Détails",
                 ),
                 SizedBox(
                   height: height * 0.02,
@@ -180,7 +175,7 @@ Future<void> addHistory(String dateIn,String dateOut,double total) async {
                 Column(
                   children: [
                     Text(
-                      'Number of Days :',
+                      'Nombre de jours :',
                       style: TextStyle(fontFamily: 'Poppins_med'),
                     ),
                     SizedBox(
@@ -289,7 +284,7 @@ Future<void> addHistory(String dateIn,String dateOut,double total) async {
                               color: MainColor),
                           child: Center(
                               child: Text(
-                            "Rent",
+                            "Louer",
                             style: TextStyle(
                                 fontFamily: "Poppins_med",
                                 fontSize: 18,
@@ -314,32 +309,49 @@ Future<void> addHistory(String dateIn,String dateOut,double total) async {
     });
   }
   void checkAndCallFunction(String startDateString, String endDateString) {
+  if(startDateString=="" || endDateString==""){
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Insert champs.'),
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.red,
+      ));
+  }
   DateTime startDate = DateTime.parse(startDateString);
   DateTime endDate = DateTime.parse(endDateString);
+  DateTime currentDate = DateTime.now();
   Duration difference = endDate.difference(startDate);
-  if (difference.inDays >= 1) {
-    addRental(startDateString, endDateString,total);
-    addHistory(startDateString, endDateString,total);
-    Navigator.pushNamed(context, 'SearshScreen');
+  if(startDate.isBefore(currentDate) && startDate.difference(currentDate).inDays>=0){
+     if (difference.inDays >= 1) {
+    if(difference.inDays==(total)/widget.price){
+      addRental(startDateString, endDateString,total);
+      addHistory(startDateString, endDateString,total);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Location ajoutée avec succès.'),
+        duration: Duration(seconds: 3),
+      ));
+      Navigator.pushNamed(context, 'SearshScreen');
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Error en Nombre de jours.'),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 3),
+      ));
+    }
   } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Error"),
-          content: Text("The difference between start and end dates must be exactly one day."),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
+     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('The difference between start and end dates must be exactly one day'),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 3),
+      ));
   }
+  }else{
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('La date n\'est pas antérieure à la date actuelle.'),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 3),
+      ));
+  }
+  
 }
 
 }

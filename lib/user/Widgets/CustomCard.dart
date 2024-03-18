@@ -166,10 +166,11 @@ class _CustomCardState extends State<CustomCard> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return const AddPostAdmin(
+            return  AddPostAdmin(
               isInEditPost: true,
-              text: "Edit Post",
+              text: "Modifier la voiture",
               isEdit: true,
+              idCar:widget.id_car,
             );
           },
         );

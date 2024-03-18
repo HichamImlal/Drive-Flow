@@ -1,6 +1,5 @@
 import 'package:drive_flow_ui/user/screens/EditProfilScreen.dart';
 import 'package:drive_flow_ui/user/screens/LoginScreen.dart';
-import 'package:drive_flow_ui/user/screens/SecurityScreen.dart';
 import 'package:flutter/material.dart';
 
 class CustomSettings extends StatelessWidget {
@@ -18,12 +17,16 @@ class CustomSettings extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12),
       child: GestureDetector(
         onTap: () {
-          if (text == "Edit profile") {
-            Navigator.pushNamed(context, 'EditProfilScreen');
+          if (text == "Modifier le profil") {
+            Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => EditProfilScreen(
+                          isAdmin: false,
+                        ),
+                      ));
             
           } else if (text == "Security") {
             Navigator.pushNamed(context, 'SecurityScreen');
-          } else if (text == "Log out") {
+          } else if (text == "Déconnexion") {
             _showLogoutDialog(context);
           }
         },
@@ -54,14 +57,14 @@ class CustomSettings extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Logout"),
-            content: const  Text('Are you sure you want to logout ?'),
+            title: const Text("Déconnexion"),
+            content: const  Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child:const Text('No'),
+                child:const Text('Non'),
               ),
               TextButton(
                 onPressed: () {
@@ -69,7 +72,7 @@ class CustomSettings extends StatelessWidget {
                     builder: (context) => const LoginScreen(),
                   ));
                 },
-                child: const Text('Yes'),
+                child: const Text('Oui'),
               )
             ],
           );

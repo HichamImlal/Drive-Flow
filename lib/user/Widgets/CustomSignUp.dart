@@ -124,19 +124,19 @@ class _SignUpCustomState extends State<SignUpCustom> {
                       width: 100,
                     ),
                     const Text(
-                      'Sign Up',
+                      'Inscription',
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
                     CustomInput(
-                      hint: 'Username',
+                      hint: 'Nom d\'utilisateur',
                       controller: _username,
                       validator: (value) {
                         if (value == null || value.isEmpty || value.length<8) {
-                          return 'Entrer your Username?';
+                          return 'Entrez votre nom d\'utilisateur ?';
                         }
                         return null;
                       },
@@ -149,10 +149,10 @@ class _SignUpCustomState extends State<SignUpCustom> {
                       hint: 'Email',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Enter your email address ?';
+                          return 'Entrez votre adresse e-mail ?';
                         }
                         if (!value.trim().endsWith('@gmail.com')) {
-                          return 'Enter a Gmail address ?';
+                          return 'Entrez une adresse Gmail ?';
                         }
                         return null;
                       },
@@ -162,12 +162,12 @@ class _SignUpCustomState extends State<SignUpCustom> {
                     ),
                     CustomInput(
                       controller: _passwordController,
-                      hint: 'Password',
+                      hint: 'Mot de passe',
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
                             value.length < 9) {
-                          return 'Password must be between 0 and 9 characters';
+                          return 'Le mot de passe doit contenir entre 0 et 9 caractères ?';
                         }
                         return null;
                       },
@@ -177,10 +177,10 @@ class _SignUpCustomState extends State<SignUpCustom> {
                     ),
                     CustomInput(
                       controller: _confirmPasswordController,
-                      hint: 'Confirm Password',
+                      hint: 'Confirmez le mot de passe',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Incorrect Password ?';
+                          return 'Mot de passe incorrect ?';
                         }
                         return null;
                       },
@@ -194,7 +194,7 @@ class _SignUpCustomState extends State<SignUpCustom> {
                         color: MainColor,
                       )
                       : ButtonCustom(
-                    text: 'Sign Up',
+                    text: 'Inscription',
                     clicked: () {
                       if (_formKey.currentState!.validate()) {
                       registerUser();
@@ -211,7 +211,7 @@ class _SignUpCustomState extends State<SignUpCustom> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Alredy have an Account ?',
+                          'Vous avez déjà un compte ?',
                           style: TextStyle(
                             fontSize: 13,
                           ),
@@ -224,7 +224,7 @@ class _SignUpCustomState extends State<SignUpCustom> {
                             Navigator.pushNamed(context, 'LoginScreen');
                           },
                           child: Text(
-                            'Login',
+                            'Connexion',
                             style: TextStyle(
                               color: MainColor,
                             ),

@@ -26,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
           CustomMenu(
             width: width,
             pathImage: "assets/images/dashboard.png",
-            text: "Dashboard",
+            text: "Tableau de bord",
             clicked: (){
               Navigator.pushNamed(context, 'DashboardAdmin');
             },
@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
           CustomMenu(
             width: width,
             pathImage: "assets/images/home.png",
-            text: "Home",
+            text: "Accueil",
             clicked: (){
               Navigator.pushNamed(context, 'HomeScreenAdmin');
             },
@@ -42,7 +42,7 @@ class CustomDrawer extends StatelessWidget {
           CustomMenu(
             width: width,
             pathImage: "assets/images/car-rental.png",
-            text: "My Rentals",
+            text: "Mes Locations",
             clicked: (){
               Navigator.pushNamed(context, 'CustomRentCars');
             },
@@ -50,12 +50,12 @@ class CustomDrawer extends StatelessWidget {
           CustomMenu(
             width: width,
             pathImage: "assets/images/question.png",
-            text: "Help & Support",
+            text: "Aide & Support",
           ),
           CustomMenu(
             width: width,
             pathImage: "assets/images/logout.png",
-            text: "Logout",
+            text: "Déconnexion",
             clicked: (){
               _showLogoutDialog(context);
             },

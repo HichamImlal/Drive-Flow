@@ -110,8 +110,8 @@ class _LoginCustomState extends State<LoginCustom> {
                     width: 100,
                   ),
                   const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    'Connexion',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 15,
@@ -121,11 +121,11 @@ class _LoginCustomState extends State<LoginCustom> {
                     controller: _emailController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your email address ?';
+                        return 'Entrez votre adresse e-mail?';
                       }
                       if (!value.trim().endsWith('@gmail.com') ||
-                          value.trim().length < "@gmail.com".length + 3) {
-                        return 'Enter a Gmail address ?';
+                          value.trim().length < "@gmail.com".length + 1) {
+                        return 'Entrez une adresse Gmail ?';
                       }
                       return null;
                     },
@@ -134,11 +134,11 @@ class _LoginCustomState extends State<LoginCustom> {
                     height: 10,
                   ),
                   CustomInput(
-                    hint: 'Password',
+                    hint: 'Mot de passe',
                     controller: _passwordController,
                     validator: (value) {
                       if (value == null || value.length < 9) {
-                        return 'Password must be between 0 and 9 characters';
+                        return 'Le mot de passe doit contenir entre 0 et 9 caractères?';
                       }
                       return null;
                     },
@@ -173,17 +173,10 @@ class _LoginCustomState extends State<LoginCustom> {
                             ),
                           ),
                           const Text(
-                            'Remember me',
+                            'Souvenez-vous de moi',
                             style: TextStyle(fontSize: 13),
                           ),
                         ],
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 15),
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(fontSize: 13),
-                        ),
                       ),
                     ],
                   ),
@@ -195,7 +188,7 @@ class _LoginCustomState extends State<LoginCustom> {
                           color: MainColor,
                         )
                       : ButtonCustom(
-                          text: 'Login',
+                          text: 'Connexion',
                           clicked: () {
                             if (_formKey.currentState!.validate()) {
                               loginUser();
@@ -213,7 +206,7 @@ class _LoginCustomState extends State<LoginCustom> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'I don\'t have an a compte ?',
+                        'Je n\'ai pas de compte ?',
                         style: TextStyle(
                           fontSize: 13,
                         ),
@@ -226,7 +219,7 @@ class _LoginCustomState extends State<LoginCustom> {
                           Navigator.pushNamed(context, 'SignUpScreen');
                         },
                         child: Text(
-                          'Register',
+                          'Inscrivez-vous',
                           style: TextStyle(
                             color: MainColor,
                           ),

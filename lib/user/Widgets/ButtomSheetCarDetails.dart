@@ -49,7 +49,7 @@ class ButtomSheetCarDetails extends StatelessWidget {
                                 TextStyle(fontSize: 18, color: Colors.black54),
                           ),
                           Text(
-                            "Agadir , Morocco",
+                            "Guelmim , Morocco",
                             style:
                                 TextStyle(fontSize: 14, color: Colors.black45),
                           ),
@@ -108,7 +108,7 @@ class ButtomSheetCarDetails extends StatelessWidget {
                         ),
                       ));
                     },
-                    text: "Rent Car",
+                    text: "Louer",
                   )
                 ],
               ),
