@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: height*0.05,
             ),
-            const CustomSearchCars(),
+            // const CustomSearchCars(),
             const Expanded(child: CustomListView(isAdmin: false,)),
           ],
         ),

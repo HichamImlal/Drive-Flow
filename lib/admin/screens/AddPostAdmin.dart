@@ -257,12 +257,6 @@ Future<void> _updatePost() async {
                           hint: "Description",
                           controller: _description,
                           maxLine: 4,
-                          validator: (value) {
-                            if (value!.length < 2) {
-                              return "Insert  Description?";
-                            }
-                            return null;
-                          },
                         ),
                       ],
                     ),
