@@ -96,6 +96,7 @@ class _CustomListViewState extends State<CustomListView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        widget.isAdmin?SizedBox(height: 15,):SizedBox(),
         TextField(
           controller: _searchController,
           decoration: InputDecoration(
@@ -106,7 +107,20 @@ class _CustomListViewState extends State<CustomListView> {
             prefixIcon: Icon(Icons.search),
             contentPadding: EdgeInsets.symmetric(horizontal: 8),
             border: OutlineInputBorder(
-              borderSide: BorderSide(),
+              borderSide: BorderSide(
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: MainColor,
+              ),
               borderRadius: BorderRadius.circular(15),
             ),
           ),

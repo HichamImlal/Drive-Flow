@@ -90,9 +90,10 @@ class _AddPostAdminState extends State<AddPostAdmin> {
     var response = await request.send();
     if (response.statusCode == 201) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Post saved successfully.'),
+        content: Text('Publication enregistrée avec succès.'),
         duration: Duration(seconds: 3),
       ));
+      Navigator.pushNamed(context, 'HomeScreenAdmin');
       print('Post saved successfully');
     } else {
       print('Failed to save post');
@@ -126,9 +127,10 @@ Future<void> _updatePost() async {
     var response = await request.send();
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Post updated successfully.'),
+        content: Text('Publication mise à jour avec succès.'),
         duration: Duration(seconds: 3),
       ));
+      Navigator.pushNamed(context, 'HomeScreenAdmin');
       print('Post updated successfully');
     } else {
       print('Failed to update post');

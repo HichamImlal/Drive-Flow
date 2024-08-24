@@ -28,6 +28,7 @@ class HeaderSettings extends StatelessWidget {
           duration: Duration(seconds: 3),
         ));
         print('Car removed successfully');
+        Navigator.pushNamed(context, 'HomeScreenAdmin');
       } else if (response.statusCode == 404) {
         print('Car not found');
       } else {
@@ -52,7 +53,6 @@ class HeaderSettings extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     removeCarById(idCar);
-                    Navigator.pushNamed(context, 'HomeScreenAdmin');
                   },
                   child: const Text('Yes'),
                 )
