@@ -1,0 +1,96 @@
+import 'package:drive_flow_ui/user/Widgets/InputButtomSheet.dart';
+import 'package:flutter/material.dart';
+
+class DetailsTimeRent extends StatelessWidget {
+  const DetailsTimeRent({super.key, this.dateStartController, this.timeStartController, this.dateEndController, this.timeendController});
+     final dateStartController;
+     final dateEndController;
+  final timeStartController ;
+  final timeendController ;
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
+    return SingleChildScrollView(
+      child: Padding(
+        padding:  EdgeInsets.only(left: width * 0.05,right: width * 0.05,bottom: MediaQuery.of(context).viewInsets.bottom, ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: height * 0.03,
+            ),
+            const Text(
+              'Prise',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: height * 0.009,
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+             Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: 6.0),
+                    child: InputButtomSheet(
+                        hint: "Date", icon: Icons.calendar_month,dateController:dateStartController,),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 6.0), 
+                    child: InputButtomSheet(
+                        hint: "Time", icon: Icons.access_time,timeController:timeStartController ,),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            const Text(
+              'Retour',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: height * 0.009,
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+             Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: 6.0),
+                    child: InputButtomSheet(
+                        hint: "Date", icon: Icons.calendar_month,dateController: dateEndController,),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 6.0),
+                    child: InputButtomSheet(
+                        hint: "Time", icon: Icons.access_time,timeController: timeendController,),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
